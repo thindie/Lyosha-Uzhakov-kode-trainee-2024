@@ -52,4 +52,8 @@ object Dependencies {
         const val gsonConverter = "com.squareup.retrofit2:converter-gson:2.9.0"
     }
 
+    object Coil {
+        const val coil = "io.coil-kt:coil-compose:2.6.0"
+    }
+
 }
