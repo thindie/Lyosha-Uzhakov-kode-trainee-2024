@@ -15,7 +15,7 @@ import dagger.Component
 internal interface AppComponent: DependenciesProvider {
     companion object{
         fun init(context: Context): AppComponent{
-            val serviceProvider = NetworkComponent.init(baseUrl = KodeTraineeCommon.RemoteSource.address)
+            val serviceProvider = NetworkComponent.init(baseUrl = KodeTraineeCommon.RemoteSource.baseUrl)
             val commonProvider = CommonsComponent.init()
             return DaggerAppComponent
                 .factory()
