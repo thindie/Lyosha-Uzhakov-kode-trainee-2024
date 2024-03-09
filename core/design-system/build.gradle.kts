@@ -54,6 +54,7 @@ dependencies {
     implementation(Dependencies.Compose.ui)
     implementation(Dependencies.Compose.uiGraphics)
     implementation(Dependencies.Compose.toolingPreview)
+    implementation(Dependencies.Compose.tooling)
     implementation(Dependencies.Compose.material3)
     implementation(Dependencies.Compose.navigation)
     implementation(Dependencies.Compose.hiltNavigation)
