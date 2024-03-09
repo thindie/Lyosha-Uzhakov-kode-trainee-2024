@@ -4,6 +4,7 @@ object KodeTraineeDrawable {
     object SearchBar{
         val glass = R.drawable.icon_search
         val options = R.drawable.icon_options
+        val cancel = R.drawable.icon_cancel
     }
 
     object Profile {
