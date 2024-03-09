@@ -6,7 +6,6 @@ import com.thindie.common.KodeTraineeCommon
 import com.thindie.common.di.CommonProvider
 import com.thindie.common.di.CommonsComponent
 import com.thindie.kodeTrainee.MainActivity
-import com.thindie.di.DaggerAppComponent
 import com.thindie.network.ServiceProvider
 import com.thindie.network.di.NetworkComponent
 import dagger.BindsInstance
