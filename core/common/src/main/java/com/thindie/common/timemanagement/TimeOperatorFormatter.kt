@@ -4,11 +4,8 @@ import java.time.format.DateTimeFormatter
 
 interface TimeOperatorFormatter {
 
-    fun getDatePickerFormat(): DateTimeFormatter
-    fun getIsoFormat(): DateTimeFormatter
-    fun getDayFormat(): DateTimeFormatter
-    fun getDayShortFormat(): DateTimeFormatter
-    fun getSimpleFormat(): DateTimeFormatter
-    fun getMonthTitleFormat(): DateTimeFormatter
-    fun getWeekDayFullFormat(): DateTimeFormatter
+
+    fun getFullDateFormat(): DateTimeFormatter
+    fun getYearFormat(): DateTimeFormatter
+    fun getDayMonthFormat(): DateTimeFormatter
 }

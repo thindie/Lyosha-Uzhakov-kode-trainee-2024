@@ -17,7 +17,7 @@ internal class TimeOperatorImpl @Inject constructor(
     TimeOperator {
     override fun getCurrent(timeInMillis: Long): String {
         val localDateTime = getCurrentLocalDateTime(timeInMillis)
-        return timeOperatorFormatter.getDatePickerFormat().format(localDateTime)
+        return timeOperatorFormatter.getFullDateFormat().format(localDateTime)
     }
 
     override fun getCurrent(timeInMillis: Long, pattern: String): String {

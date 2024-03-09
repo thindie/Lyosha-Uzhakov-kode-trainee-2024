@@ -11,62 +11,33 @@ import javax.inject.Singleton
 @Module
 internal class DateTimeFormatterModule {
 
-    @Provides
-    @Singleton
-    @Named("custom")
-    fun provideDateTimeFormatterCustom(
-        timePattern: TimePatterns,
-        locale: Locale,
-    ): DateTimeFormatter {
-        return DateTimeFormatter.ofPattern(timePattern.patternCustom(), locale)
-    }
+
 
     @Provides
     @Singleton
-    @Named("day")
-    fun provideDateTimeFormatterDay(timePattern: TimePatterns, locale: Locale): DateTimeFormatter {
-        return DateTimeFormatter.ofPattern(timePattern.patternDay(), locale)
-    }
-
-    @Provides
-    @Singleton
-    @Named("dayFull")
-    fun provideDateWeekDay(timePattern: TimePatterns, locale: Locale): DateTimeFormatter {
-        return DateTimeFormatter.ofPattern(timePattern.patternDay(), locale)
-    }
-
-    @Provides
-    @Singleton
-    @Named("daySimpleNumber")
-    fun provideSimpleDay(timePattern: TimePatterns, locale: Locale): DateTimeFormatter {
-        return DateTimeFormatter.ofPattern(timePattern.patternSimpleDay(), locale)
-    }
-
-    @Provides
-    @Singleton
-    @Named("datePicker")
+    @Named("fullDate")
     fun provideSpecialFormatDay(timePattern: TimePatterns, locale: Locale): DateTimeFormatter {
-        return DateTimeFormatter.ofPattern(timePattern.patternSpecialFormat(), locale)
+        return DateTimeFormatter.ofPattern(timePattern.dayMonthYear(), locale)
     }
 
     @Provides
     @Singleton
-    @Named("dayShort")
+    @Named("year")
     fun provideDateTimeFormatterDayShort(
         timePattern: TimePatterns,
         locale: Locale,
     ): DateTimeFormatter {
-        return DateTimeFormatter.ofPattern(timePattern.patternDayShort(), locale)
+        return DateTimeFormatter.ofPattern(timePattern.year(), locale)
     }
 
     @Provides
     @Singleton
-    @Named("monthTitle")
+    @Named("dayMonth")
     fun provideDateTimeFormatterMonthTitle(
         timePattern: TimePatterns,
         locale: Locale,
     ): DateTimeFormatter {
-        return DateTimeFormatter.ofPattern(timePattern.patternMonthFull(), locale)
+        return DateTimeFormatter.ofPattern(timePattern.dayMonth(), locale)
     }
 
     @Provides
