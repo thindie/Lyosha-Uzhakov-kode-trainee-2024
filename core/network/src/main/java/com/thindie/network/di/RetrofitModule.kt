@@ -12,7 +12,7 @@ internal class RetrofitModule {
 
     @Provides
     @Singleton
-    internal fun provideOkHttpClient() = OkHttpClient()
+     fun provideOkHttpClient() = OkHttpClient()
         .newBuilder()
         .build()
 
