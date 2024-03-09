@@ -15,6 +15,8 @@ object KodeTraineeDimen {
     }
 
     object Spacing {
+        val cutHorizontal = cut
+        val cutVertical = cut
         val baseVertical = base
         val extendedVertical = extended
         val baseHorizontal = extended
