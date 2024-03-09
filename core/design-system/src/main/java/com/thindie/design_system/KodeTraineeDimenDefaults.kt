@@ -28,6 +28,7 @@ object KodeTraineeDimenDefaults {
     object Spacing {
         val baseVertical by lazy { base }
         val extendedVertical by lazy { extended }
+        val baseHorizontal by lazy { extended }
     }
 
     object CoderList {
@@ -45,6 +46,11 @@ object KodeTraineeDimenDefaults {
 
     object ProfileInfoBar {
         val height by lazy { cut.times(15) }
+    }
+
+    object DrawableSize {
+        val base by lazy { extended.times(2) }
+        val large by lazy { extended.times(6) }
     }
 
     @Composable
