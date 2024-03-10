@@ -58,7 +58,7 @@ class ShimmeringState(
                     durationMillis = shimmerDuration,
                     easing = EaseInBounce
                 ),
-                repeatMode = RepeatMode.Restart
+                repeatMode = RepeatMode.Reverse
             ),
             label = ""
         )
