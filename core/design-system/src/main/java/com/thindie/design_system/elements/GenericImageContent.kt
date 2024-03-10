@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import com.thindie.design_system.KodeTraineeDimen
+import com.thindie.design_system.KodeTraineeDimenDefaults
 import com.thindie.design_system.KodeTraineeDrawable
 import com.thindie.design_system.painter
 import com.thindie.design_system.theme.KodeTraineeTheme
@@ -28,8 +28,8 @@ fun KodeTraineeGenericIconComponentRow(
     modifier: Modifier = Modifier,
     painter: Painter,
     iconTint: Color = MaterialTheme.colorScheme.onBackground,
-    iconSize: Dp = KodeTraineeDimen.DrawableSize.base,
-    contentSpacing: Dp = KodeTraineeDimen.Spacing.baseHorizontal,
+    iconSize: Dp = KodeTraineeDimenDefaults.DrawableSize.base,
+    contentSpacing: Dp = KodeTraineeDimenDefaults.Spacing.baseHorizontal,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     verticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
     content: @Composable () -> Unit,
@@ -56,8 +56,8 @@ fun KodeTraineeGenericIconComponentRow(
 fun KodeTraineeGenericImageComponentRow(
     modifier: Modifier = Modifier,
     painter: Painter,
-    iconSize: Dp = KodeTraineeDimen.DrawableSize.large,
-    contentSpacing: Dp = KodeTraineeDimen.Spacing.baseHorizontal,
+    iconSize: Dp = KodeTraineeDimenDefaults.DrawableSize.large,
+    contentSpacing: Dp = KodeTraineeDimenDefaults.Spacing.baseHorizontal,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     verticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
     content: @Composable () -> Unit,

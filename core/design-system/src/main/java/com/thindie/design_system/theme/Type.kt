@@ -2,64 +2,60 @@ package com.thindie.design_system.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.font.toFontFamily
-import androidx.compose.ui.unit.sp
-import com.thindie.design_system.R
-
-
-val labelFont = Font(R.font.inter)
-val labelFamily = labelFont.toFontFamily()
-
-val bodyFont = Font(R.font.inter)
-val bodyFamily = bodyFont.toFontFamily()
-
-val displayFont = Font(R.font.inter)
-val displayFamily = displayFont.toFontFamily()
-
-val titleFont = Font(R.font.inter)
-val titleFamily = titleFont.toFontFamily()
-
-val headLineFont = Font(R.font.inter)
-val headLineFamily = headLineFont.toFontFamily()
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.bodyFamily
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.bodyMedium
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.bodyMediumLineHeight
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.bodySmall
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.bodySmallLineHeight
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.labelFamily
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.labelMedium
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.labelMediumLineHeight
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.labelSmall
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.labelSmallLineHeight
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.titleFamily
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.titleLarge
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.titleLargeLineHeight
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.titleMedium
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.titleMediumLineHeight
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.titleSmall
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.titleSmallLineHeight
 
 
 val Typography = Typography(
-    displayLarge = TextStyle(fontFamily = displayFamily, fontSize = 57.sp, lineHeight = 64.sp),
-    displayMedium = TextStyle(fontFamily = displayFamily, fontSize = 45.sp, lineHeight = 52.sp),
-    displaySmall = TextStyle(fontFamily = displayFamily, fontSize = 36.sp, lineHeight = 44.sp),
-    headlineLarge = TextStyle(fontFamily = headLineFamily, fontSize = 32.sp, lineHeight = 40.sp),
-    headlineMedium = TextStyle(fontFamily = headLineFamily, fontSize = 28.sp, lineHeight = 36.sp),
-    headlineSmall = TextStyle(fontFamily = headLineFamily, fontSize = 24.sp, lineHeight = 32.sp),
-    titleLarge = TextStyle(fontFamily = titleFamily, fontSize = 22.sp, lineHeight = 28.sp),
+    titleLarge = TextStyle(
+        fontFamily = titleFamily,
+        fontSize = titleLarge,
+        lineHeight = titleLargeLineHeight
+    ),
     titleMedium = TextStyle(
         fontFamily = titleFamily,
-        fontSize = 16.sp,
-        fontWeight = FontWeight.W500,
-        lineHeight = 24.sp
+        fontSize = titleMedium,
+        lineHeight = titleMediumLineHeight
     ),
-    titleSmall = TextStyle(fontFamily = titleFamily, fontSize = 14.sp, lineHeight = 20.sp),
-    bodyLarge = TextStyle(fontFamily = bodyFamily, fontSize = 16.sp, lineHeight = 24.sp),
-    bodyMedium = TextStyle(fontFamily = bodyFamily, fontSize = 14.sp, lineHeight = 20.sp),
-    bodySmall = TextStyle(fontFamily = bodyFamily, fontSize = 12.sp, lineHeight = 16.sp),
-    labelLarge = TextStyle(
-        fontFamily = labelFamily,
-        fontSize = 14.sp,
-        fontWeight = FontWeight.W500,
-        lineHeight = 20.sp
+    titleSmall = TextStyle(
+        fontFamily = titleFamily,
+        fontSize = titleSmall,
+        lineHeight = titleSmallLineHeight
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = bodyFamily,
+        fontSize = bodyMedium,
+        lineHeight = bodyMediumLineHeight
+    ),
+    bodySmall = TextStyle(
+        fontFamily = bodyFamily,
+        fontSize = bodySmall,
+        lineHeight = bodySmallLineHeight
     ),
     labelMedium = TextStyle(
         fontFamily = labelFamily,
-        fontSize = 12.sp,
-        fontWeight = FontWeight.W500,
-        lineHeight = 16.sp
+        fontSize = labelMedium,
+        lineHeight = labelMediumLineHeight
     ),
     labelSmall = TextStyle(
         fontFamily = labelFamily,
-        fontSize = 11.sp,
-        fontWeight = FontWeight.W500,
-        lineHeight = 16.sp
+        fontSize = labelSmall,
+        lineHeight = labelSmallLineHeight
     )
 
 )
