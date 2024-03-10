@@ -63,12 +63,15 @@ fun  KodeTraineeTheme(
     content: @Composable () -> Unit,
 ) {
 
+/*
     val density = LocalDensity.current
     KodeTraineeDimenDefaults.adjustPixelsToDp(density = density)
     KodeTraineeTypographyDefaults.adjustFontsSizeInPixelsToSp(density = density)
     KodeTraineeShapesDefaults.adjustShapes(density = density)
+    KodeTraineeShapesDefaults.adjustShapes(density = density)
+*/
 
-    val colorScheme = when {
+        val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
@@ -92,6 +95,6 @@ fun  KodeTraineeTheme(
         colorScheme = colorScheme,
         typography = Typography,
         content = content,
-        shapes = KodeTraineeShapesDefaults.getMaterailShapes(density = density)
+        shapes = KodeTraineeShapesDefaults.getMaterailShapes()
     )
 }
