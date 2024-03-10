@@ -2,6 +2,7 @@ package com.thindie.design_system
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 
 object KodeTraineeDimenDefaults {
@@ -47,12 +48,12 @@ object KodeTraineeDimenDefaults {
     }
 
     @Composable
-    fun adjustPixelsToDp() {
+    fun adjustPixelsToDp(density: Density) {
         if (isAdjusted.not()){
-            cut = convertPixelsToDp(cutPix)
-            extended = convertPixelsToDp(extendedPix)
-            base = convertPixelsToDp(basePix)
-            full = convertPixelsToDp(fullPix)
+            cut = convertPixelsToDp(cutPix, density = density)
+            extended = convertPixelsToDp(extendedPix, density = density)
+            base = convertPixelsToDp(basePix, density = density)
+            full = convertPixelsToDp(fullPix, density = density)
             isAdjusted = true
         }
     }

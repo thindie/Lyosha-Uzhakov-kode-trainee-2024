@@ -3,6 +3,7 @@ package com.thindie.design_system.theme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.toFontFamily
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.sp
 import com.thindie.design_system.R
 import com.thindie.design_system.convertPixelsToSp
@@ -55,15 +56,15 @@ object KodeTraineeTypographyDefaults {
     val headLineFamily = headLineFont.toFontFamily()
 
     @Composable
-    fun adjustFontsSizeInPixelsToSp() {
+    fun adjustFontsSizeInPixelsToSp(density:Density) {
         if (isAdjusted.not()) {
-            labelSmall = convertPixelsToSp(pixels = captionPx)
-            labelMedium = convertPixelsToSp(pixels = subHeadPx)
-            bodySmall = convertPixelsToSp(pixels = textPx)
-            bodyMedium = convertPixelsToSp(pixels = headlinePx)
-            titleSmall = convertPixelsToSp(pixels = title3Px)
-            titleMedium = convertPixelsToSp(pixels = title2Px)
-            titleLarge = convertPixelsToSp(pixels = title1Px)
+            labelSmall = convertPixelsToSp(pixels = captionPx, density = density)
+            labelMedium = convertPixelsToSp(pixels = subHeadPx, density = density)
+            bodySmall = convertPixelsToSp(pixels = textPx, density = density)
+            bodyMedium = convertPixelsToSp(pixels = headlinePx, density = density)
+            titleSmall = convertPixelsToSp(pixels = title3Px, density = density)
+            titleMedium = convertPixelsToSp(pixels = title2Px, density = density)
+            titleLarge = convertPixelsToSp(pixels = title1Px, density = density)
             isAdjusted = true
         }
     }
