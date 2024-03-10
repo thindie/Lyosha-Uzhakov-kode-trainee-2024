@@ -21,9 +21,7 @@ class MainActivity : ComponentActivity(), App {
 
 
         setContent {
-            val density = LocalDensity.current
-            KodeTraineeDimenDefaults.adjustPixelsToDp(density = density)
-            KodeTraineeTypographyDefaults.adjustFontsSizeInPixelsToSp(density = density)
+
             KodeTraineeTheme {
 
             }
