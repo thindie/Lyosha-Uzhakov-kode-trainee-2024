@@ -26,6 +26,8 @@ object KodeTraineeDimenDefaults {
     }
 
     object Spacing {
+        val cutHorizontal by lazy { cut }
+        val cutVertical by lazy { cut }
         val baseVertical by lazy { base }
         val extendedVertical by lazy { extended }
         val baseHorizontal by lazy { extended }

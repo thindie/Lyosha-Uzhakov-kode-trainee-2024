@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import com.thindie.design_system.KodeTraineeDimen
+import com.thindie.design_system.KodeTraineeDimenDefaults
 import com.thindie.design_system.KodeTraineeDrawable
 import com.thindie.design_system.painter
 import com.thindie.design_system.theme.KodeTraineeTheme
@@ -31,7 +31,7 @@ fun KodeTraineeGenericTextContentRow(
     baseElementTextStyle: TextStyle,
     slaveText: String,
     slaveElementTextStyle: TextStyle,
-    contentSpacing: Dp = KodeTraineeDimen.Spacing.cutHorizontal,
+    contentSpacing: Dp = KodeTraineeDimenDefaults.Spacing.cutHorizontal,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     verticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
 ) {
@@ -55,8 +55,8 @@ fun KodeTraineeGenericTextContentColumn(
     baseElementTextStyle: TextStyle,
     slaveText: String,
     slaveElementTextStyle: TextStyle,
-    contentSpacingHorizontal: Dp = KodeTraineeDimen.Spacing.cutHorizontal,
-    contentSpacingVertical: Dp = KodeTraineeDimen.Spacing.cutVertical,
+    contentSpacingHorizontal: Dp = KodeTraineeDimenDefaults.Spacing.cutHorizontal,
+    contentSpacingVertical: Dp = KodeTraineeDimenDefaults.Spacing.cutVertical,
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     content: @Composable () -> Unit,
@@ -91,7 +91,7 @@ fun previewKodeTraineeGenericTextContentRow() {
             baseElementTextStyle = MaterialTheme.typography.titleSmall,
             slaveText = SLAVE_TEXT,
             slaveElementTextStyle = MaterialTheme.typography.labelMedium,
-            contentSpacing = KodeTraineeDimen.Spacing.baseHorizontal,
+            contentSpacing = KodeTraineeDimenDefaults.Spacing.baseHorizontal,
         )
     }
 }
@@ -101,12 +101,12 @@ fun previewKodeTraineeGenericTextContentRow() {
 fun previewKodeTraineeGenericTextContentColumn() {
     KodeTraineeTheme {
         KodeTraineeGenericTextContentColumn(
-            modifier = Modifier.height(KodeTraineeDimen.CoderList.height),
+            modifier = Modifier.height(KodeTraineeDimenDefaults.CoderList.height),
             text = TEXT,
             baseElementTextStyle = MaterialTheme.typography.titleSmall,
             slaveText = SLAVE_TEXT,
             slaveElementTextStyle = MaterialTheme.typography.labelMedium,
-            contentSpacingVertical = KodeTraineeDimen.Spacing.baseVertical,
+            contentSpacingVertical = KodeTraineeDimenDefaults.Spacing.baseVertical,
         ) {
             Text(text = TEXT, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
         }
@@ -115,19 +115,19 @@ fun previewKodeTraineeGenericTextContentColumn() {
 
 @Composable
 @Preview
-fun previewDrawableTextGenericSections(){
-        KodeTraineeTheme {
-            KodeTraineeGenericImageComponentRow(painter = KodeTraineeDrawable.Stub.stubGoose.painter()) {
-                KodeTraineeGenericTextContentColumn(
-                    modifier = Modifier.height(KodeTraineeDimen.CoderList.height),
-                    text = TEXT,
-                    baseElementTextStyle = MaterialTheme.typography.titleSmall,
-                    slaveText = SLAVE_TEXT,
-                    slaveElementTextStyle = MaterialTheme.typography.labelMedium,
-                    contentSpacingVertical = KodeTraineeDimen.Spacing.baseVertical,
-                ) {
-                    Text(text = TEXT, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
-                }
+fun previewDrawableTextGenericSections() {
+    KodeTraineeTheme {
+        KodeTraineeGenericImageComponentRow(painter = KodeTraineeDrawable.Stub.stubGoose.painter()) {
+            KodeTraineeGenericTextContentColumn(
+                modifier = Modifier.height(KodeTraineeDimenDefaults.CoderList.height),
+                text = TEXT,
+                baseElementTextStyle = MaterialTheme.typography.titleSmall,
+                slaveText = SLAVE_TEXT,
+                slaveElementTextStyle = MaterialTheme.typography.labelMedium,
+                contentSpacingVertical = KodeTraineeDimenDefaults.Spacing.baseVertical,
+            ) {
+                Text(text = TEXT, style = MaterialTheme.typography.labelSmall, color = Color.Gray)
             }
         }
+    }
 }
