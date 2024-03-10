@@ -39,8 +39,8 @@ object KodeTraineeShapesDefaults {
     }
     // Material theme Variant
     @Composable
-    fun getMaterailShapes(density: Density): Shapes{
-        adjustShapes(density =density)
+    fun getMaterailShapes(): Shapes{
+
         return Shapes( medium = searchBar, large = bottomSheet, extraLarge = avatar)
     }
 

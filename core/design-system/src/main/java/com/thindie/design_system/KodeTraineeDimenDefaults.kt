@@ -52,6 +52,7 @@ object KodeTraineeDimenDefaults {
 
     object DrawableSize {
         val base by lazy { extended.times(2) }
+        val medium by lazy { base.times(7) }
         val large by lazy { extended.times(6) }
     }
 
