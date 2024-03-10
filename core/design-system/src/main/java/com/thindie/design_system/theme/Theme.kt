@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.thindie.design_system.KodeTraineeDimenDefaults
+import com.thindie.design_system.KodeTraineeShapesDefaults
 
 
 private val LightColors = lightColorScheme(
@@ -65,7 +66,7 @@ fun  KodeTraineeTheme(
     val density = LocalDensity.current
     KodeTraineeDimenDefaults.adjustPixelsToDp(density = density)
     KodeTraineeTypographyDefaults.adjustFontsSizeInPixelsToSp(density = density)
-
+    KodeTraineeShapesDefaults.adjustShapes(density = density)
 
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
@@ -91,6 +92,6 @@ fun  KodeTraineeTheme(
         colorScheme = colorScheme,
         typography = Typography,
         content = content,
-        shapes = shapes
+        shapes = KodeTraineeShapesDefaults.getMaterailShapes(density = density)
     )
 }
