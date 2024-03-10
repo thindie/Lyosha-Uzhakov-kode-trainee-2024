@@ -2,27 +2,13 @@ package com.thindie.design_system.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.font.toFontFamily
 import androidx.compose.ui.unit.sp
-import com.thindie.design_system.R
-
-
-val labelFont = Font(R.font.inter)
-val labelFamily = labelFont.toFontFamily()
-
-val bodyFont = Font(R.font.inter)
-val bodyFamily = bodyFont.toFontFamily()
-
-val displayFont = Font(R.font.inter)
-val displayFamily = displayFont.toFontFamily()
-
-val titleFont = Font(R.font.inter)
-val titleFamily = titleFont.toFontFamily()
-
-val headLineFont = Font(R.font.inter)
-val headLineFamily = headLineFont.toFontFamily()
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.bodyFamily
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.displayFamily
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.headLineFamily
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.labelFamily
+import com.thindie.design_system.theme.KodeTraineeTypographyDefaults.titleFamily
 
 
 val Typography = Typography(
