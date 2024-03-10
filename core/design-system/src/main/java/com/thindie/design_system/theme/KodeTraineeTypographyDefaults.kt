@@ -21,6 +21,8 @@ object KodeTraineeTypographyDefaults {
     private const val captionPx = 13f  //labelSmall
 
 
+
+
     var labelSmall = 13.sp
         private set
     var labelMedium = 14.sp
