@@ -108,7 +108,8 @@ object KodeTraineeTypographyDefaults {
             titleSmallLineHeight = convertPixelsToSp(pixels = title3PxLineHeight, density = density)
 
             titleMedium = convertPixelsToSp(pixels = title2Px, density = density)
-            titleMediumLineHeight = convertPixelsToSp(pixels = title2PxLineHeight, density = density)
+            titleMediumLineHeight =
+                convertPixelsToSp(pixels = title2PxLineHeight, density = density)
 
             titleLarge = convertPixelsToSp(pixels = title1Px, density = density)
             titleLargeLineHeight = convertPixelsToSp(pixels = title1PxLineHeight, density = density)

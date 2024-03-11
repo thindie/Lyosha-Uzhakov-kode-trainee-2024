@@ -18,12 +18,14 @@ object KodeTraineeShapesDefaults {
 
     val searchBar by lazy { RoundedCornerShape(cornerRadius) }
 
-    val bottomSheet by lazy { RoundedCornerShape(
-        topStart = cornerRadius,
-        topEnd = cornerRadius,
-        bottomStart = 0.dp,
-        bottomEnd = 0.dp
-    ) }
+    val bottomSheet by lazy {
+        RoundedCornerShape(
+            topStart = cornerRadius,
+            topEnd = cornerRadius,
+            bottomStart = 0.dp,
+            bottomEnd = 0.dp
+        )
+    }
 
     val avatar by lazy { CircleShape }
 
@@ -31,17 +33,18 @@ object KodeTraineeShapesDefaults {
 
     @Composable
     fun adjustShapes(density: Density) {
-        if (isAdjusted.not()){
+        if (isAdjusted.not()) {
             cornerRadius = convertPixelsToDp(pixels = cornerRoundPx, density = density)
-            isAdjusted  = true
+            isAdjusted = true
         }
 
     }
+
     // Material theme Variant
     @Composable
-    fun getMaterailShapes(): Shapes{
+    fun getMaterailShapes(): Shapes {
 
-        return Shapes( medium = searchBar, large = bottomSheet, extraLarge = avatar)
+        return Shapes(medium = searchBar, large = bottomSheet, extraLarge = avatar)
     }
 
 }

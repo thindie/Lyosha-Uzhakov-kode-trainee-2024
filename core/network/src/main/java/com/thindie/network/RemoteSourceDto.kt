@@ -5,7 +5,7 @@ interface RemoteSourceDto {
     fun getDtoAvatarLink(): String
     fun getDtoBirthday(): String
 
-    fun getDtoDepartment():String
+    fun getDtoDepartment(): String
 
     fun getDtoFirstName(): String
 

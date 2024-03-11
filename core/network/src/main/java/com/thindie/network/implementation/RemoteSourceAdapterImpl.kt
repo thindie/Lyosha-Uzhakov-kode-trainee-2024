@@ -7,17 +7,16 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-internal class RemoteSourceAdapterImpl @Inject constructor(private val apiService: ApiService):
+internal class RemoteSourceAdapterImpl @Inject constructor(private val apiService: ApiService) :
     RemoteSourceAdapter {
-    override suspend fun <R> getCodersDtoList(mapper: (RemoteSourceDto) -> R): Result<List<R>>{
+    override suspend fun <R> getCodersDtoList(mapper: (RemoteSourceDto) -> R): Result<List<R>> {
         return kotlin.runCatching {
-         val serviceResponse =   apiService.getUsers()
-           if (serviceResponse.isSuccessful && serviceResponse.body() != null){
-               serviceResponse.body()!!
-                   .items
-                   .map(mapper)
-           }
-            else error("httpCode:  ${serviceResponse.code() }; fetching data is not successful")
+            val serviceResponse = apiService.getUsers()
+            if (serviceResponse.isSuccessful && serviceResponse.body() != null) {
+                serviceResponse.body()!!
+                    .items
+                    .map(mapper)
+            } else error("httpCode:  ${serviceResponse.code()}; fetching data is not successful")
         }
     }
 

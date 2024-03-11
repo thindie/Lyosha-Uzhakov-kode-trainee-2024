@@ -5,7 +5,7 @@ import com.thindie.common.App
 import com.thindie.common.DependenciesProvider
 import com.thindie.kodeTrainee.di.AppComponent
 
-internal class KodeTraineeApplication: Application(), App {
+internal class KodeTraineeApplication : Application(), App {
 
     private lateinit var appComponent: AppComponent
 
@@ -13,8 +13,8 @@ internal class KodeTraineeApplication: Application(), App {
         return getAppComponent()
     }
 
-     fun getAppComponent(): AppComponent {
-        if (::appComponent.isInitialized.not()){
+    fun getAppComponent(): AppComponent {
+        if (::appComponent.isInitialized.not()) {
             appComponent = AppComponent.init(this)
         }
         return appComponent

@@ -8,9 +8,9 @@ import javax.inject.Named
 internal class TimeOperatorFormatterImpl @Inject constructor(
     @Named("fullDate") private val fullDate: DateTimeFormatter,
     @Named("year") private val dayFormat: DateTimeFormatter,
-     @Named("dayMonth") private val dayFormatShort: DateTimeFormatter,
+    @Named("dayMonth") private val dayFormatShort: DateTimeFormatter,
 
-) : TimeOperatorFormatter {
+    ) : TimeOperatorFormatter {
 
     override fun getFullDateFormat() = fullDate
     override fun getYearFormat() = dayFormat

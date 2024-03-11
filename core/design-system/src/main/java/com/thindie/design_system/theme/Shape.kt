@@ -2,10 +2,7 @@ package com.thindie.design_system.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.unit.dp
-
-
 
 
 val shapes: Shapes = Shapes(

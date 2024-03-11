@@ -72,12 +72,14 @@ fun KodeTraineeGenericImageComponentRow(
             painter = painter,
             contentDescription = null,
 
-        )
+            )
         Spacer(modifier = Modifier.width(contentSpacing))
         content()
     }
 }
+
 private const val PREVIEW = "♦◘╩lJjlMWEQy"
+
 @Composable
 @Preview
 fun previewKodeTraineeGenericIconComponent() {

@@ -12,7 +12,6 @@ import javax.inject.Singleton
 internal class DateTimeFormatterModule {
 
 
-
     @Provides
     @Singleton
     @Named("fullDate")

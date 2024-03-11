@@ -9,11 +9,13 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [DispatchersModule::class,
-    DateTimeFormatterModule::class,
-    LocaleModule::class,
-    TimeOperatorModule::class,
-    TimeZoneModule::class])
+@Component(
+    modules = [DispatchersModule::class,
+        DateTimeFormatterModule::class,
+        LocaleModule::class,
+        TimeOperatorModule::class,
+        TimeZoneModule::class]
+)
 interface CommonsComponent : CommonProvider {
     companion object {
         fun init(): CommonsComponent {

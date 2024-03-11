@@ -11,8 +11,8 @@ internal data class Item(
     val lastName: String,
     val phone: String,
     val position: String,
-    val userTag: String
-): RemoteSourceDto {
+    val userTag: String,
+) : RemoteSourceDto {
     override fun getDtoAvatarLink() = avatarUrl
 
     override fun getDtoBirthday() = birthday

@@ -17,7 +17,7 @@ inline fun <T, R> LazyListScope.itemsMap(
         stickyHeader { headerContent(it.key) }
 
         item(
-            key = if (key != null) { index: Int -> index  } else null,
+            key = if (key != null) { index: Int -> index } else null,
             contentType = { index: Int -> contentType(it.value) }
         ) {
             itemsContent(it.value)

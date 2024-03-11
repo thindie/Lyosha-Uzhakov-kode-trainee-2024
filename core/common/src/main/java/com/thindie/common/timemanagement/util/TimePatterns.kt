@@ -10,7 +10,7 @@ internal class TimePatterns @Inject constructor() {
         return "dd MMMM yyyy"
     }
 
-    fun year() : String {
+    fun year(): String {
         return "yyyy"
     }
 

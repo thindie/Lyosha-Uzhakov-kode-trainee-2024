@@ -7,11 +7,12 @@ import com.thindie.design_system.theme.KodeTraineeTheme
 
 
 @Composable
-fun KDT(modifier: Modifier = Modifier){}
+fun KDT(modifier: Modifier = Modifier) {
+}
 
 @Composable
 @Preview
-fun previewKDT(){
+fun previewKDT() {
     KodeTraineeTheme {
         KDT()
     }

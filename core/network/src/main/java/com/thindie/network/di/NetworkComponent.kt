@@ -7,7 +7,7 @@ import javax.inject.Singleton
 
 @Component(modules = [RetrofitModule::class, RemoteSourceAdapterModule::class, ApiServiceModule::class])
 @Singleton
-interface NetworkComponent: ServiceProvider {
+interface NetworkComponent : ServiceProvider {
     companion object {
         fun init(baseUrl: String): NetworkComponent {
             return DaggerNetworkComponent

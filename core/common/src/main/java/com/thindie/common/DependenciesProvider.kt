@@ -3,4 +3,4 @@ package com.thindie.common
 import com.thindie.common.di.CommonProvider
 import com.thindie.network.ServiceProvider
 
-interface DependenciesProvider: ServiceProvider, CommonProvider
+interface DependenciesProvider :  CommonProvider

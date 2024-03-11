@@ -5,7 +5,7 @@ import com.thindie.common.timemanagement.TimeOperatorFormatter
 import kotlinx.coroutines.CoroutineDispatcher
 
 interface CommonProvider {
-   
+
     @IODispatcher
     fun provideCoroutineDispatcher(): CoroutineDispatcher
 

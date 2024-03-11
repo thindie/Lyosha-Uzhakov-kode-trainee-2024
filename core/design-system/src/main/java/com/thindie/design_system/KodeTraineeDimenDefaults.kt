@@ -58,7 +58,7 @@ object KodeTraineeDimenDefaults {
 
     @Composable
     fun adjustPixelsToDp(density: Density) {
-        if (isAdjusted.not()){
+        if (isAdjusted.not()) {
             cut = convertPixelsToDp(cutPix, density = density)
             extended = convertPixelsToDp(extendedPix, density = density)
             base = convertPixelsToDp(basePix, density = density)

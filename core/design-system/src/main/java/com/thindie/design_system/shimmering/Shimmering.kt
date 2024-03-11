@@ -31,7 +31,7 @@ class ShimmeringState(
     private val shimmerDuration: Int,
 ) {
 
-   private val colorList
+    private val colorList
         @Composable get() = listOf(
             color,
             color

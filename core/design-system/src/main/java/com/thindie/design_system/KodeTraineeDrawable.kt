@@ -1,7 +1,7 @@
 package com.thindie.design_system
 
 object KodeTraineeDrawable {
-    object SearchBar{
+    object SearchBar {
         val glass = R.drawable.icon_search
         val options = R.drawable.icon_options
         val cancel = R.drawable.icon_cancel
@@ -13,7 +13,7 @@ object KodeTraineeDrawable {
         val back = R.drawable.icon_back
     }
 
-    object BottomSheet{
+    object BottomSheet {
         val selected = R.drawable.icon_selected
         val unselected = R.drawable.icon_unselected
     }

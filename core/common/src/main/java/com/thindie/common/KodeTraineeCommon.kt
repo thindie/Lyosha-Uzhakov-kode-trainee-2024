@@ -1,7 +1,7 @@
 package com.thindie.common
 
 object KodeTraineeCommon {
-    object RemoteSource{
+    object RemoteSource {
         const val baseUrl = "https://stoplight.io/mocks/kode-api/trainee-test/331141861/"
     }
 
