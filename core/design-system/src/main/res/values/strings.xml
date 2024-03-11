@@ -1,4 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">KodeTrainee</string>
+
+    <string name="search_bar_placeholder"> "Введи имя, тег, почту…"</string>
+    <string name="search_bar_cancel_textbutton">Отмена</string>
+
+    <string name="load_screen_list_planchette">Designers </string>
+
+    <string name="error_screen_ubermind">"Какой-то сверхразум все сломал"</string>
+    <string name="error_screen_quick_fix">"Постараемся быстро починить"</string>
+    <string name="error_screen_try_again">"Попробовать снова"</string>
+
+    <string name="bottom_sheet_title">Сортировка</string>
+    <string name="bottom_sheet_option_alphabet">"По алфавиту"</string>
+    <string name="bottom_sheet_option_birthday">"По дню рождения"</string>
+
+    <string name="coders_nothing_found">"Мы никого не нашли"</string>
+    <string name="coders_nothing_found_correct_request">"Попробуй скорректировать запрос"</string>
+
+    <string name="snack_bar_trouble">"Не могу обновить данные.
+    Проверь соединение с интернетом. "</string>
+    <string name="snack_bar_relaunch">"Секундочку, гружусь…"</string>
+
+    <string name="profile_year_suffix_ru_locale_opt1">"года"</string>
+    <string name="profile_year_suffix__ru_locale_opt2">"лет"</string>
+
+    <string name="departmens">"Все"</string>
+    <string name="department_android">"Android"</string>
+    <string name="department_ios">"iOs"</string>
+    <string name="department_design">"Designers"</string>
+    <string name="department_management">"Managers"</string>
+    <string name="department_qa">"QA"</string>
+    <string name="department_back_office">"Back Office"</string>
+    <string name="department_frontend">"Frontend"</string>
+    <string name="department_hr">"HR"</string>
+    <string name="department_pr">"PR"</string>
+    <string name="department_backend">"Backend"</string>
+    <string name="department_support">"Support"</string>
+    <string name="department_analytics">"Analysts"</string>
+
 </resources>
