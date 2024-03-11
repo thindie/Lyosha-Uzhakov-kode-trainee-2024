@@ -20,5 +20,6 @@ include(":core:network")
 include(":core:design-system")
 include(":features:coders")
 include(":features:coder-profile")
+include(":core:model")
 
  
