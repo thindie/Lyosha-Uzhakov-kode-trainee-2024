@@ -27,16 +27,16 @@
 
     <string name="departmens">"Все"</string>
     <string name="department_android">"Android"</string>
-    <string name="department_ios">"iOs"</string>
-    <string name="department_design">"Designers"</string>
-    <string name="department_management">"Managers"</string>
+    <string name="department_ios">"iOS"</string>
+    <string name="department_design">"Дизайн"</string>
+    <string name="department_management">"Менеджмент"</string>
     <string name="department_qa">"QA"</string>
-    <string name="department_back_office">"Back Office"</string>
+    <string name="department_back_office">"Бэк-офис"</string>
     <string name="department_frontend">"Frontend"</string>
     <string name="department_hr">"HR"</string>
     <string name="department_pr">"PR"</string>
     <string name="department_backend">"Backend"</string>
-    <string name="department_support">"Support"</string>
-    <string name="department_analytics">"Analysts"</string>
+    <string name="department_support">"Техподдержка"</string>
+    <string name="department_analytics">"Аналитика"</string>
 
 </resources>
