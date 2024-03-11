@@ -4,4 +4,5 @@ object Modules {
     val featureMain = ":core:features:coders"
     val common = ":core:common"
     val app = ":app"
+    val featureProfile = ":core:features:coder-profile"
 }

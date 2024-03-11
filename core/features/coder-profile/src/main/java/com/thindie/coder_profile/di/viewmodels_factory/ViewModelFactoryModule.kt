@@ -1,13 +1,13 @@
-package com.thindie.coders.di.viewmodels_factory
+package com.thindie.coder_profile.di.viewmodels_factory
 
 import androidx.lifecycle.ViewModelProvider
-import com.thindie.coders.di.CodersMainScope
+import com.thindie.coder_profile.di.CoderProfileScope
 import dagger.Binds
 import dagger.Module
 
 @Module()
 internal interface ViewModelFactoryModule {
     @Binds
-    @CodersMainScope
+    @CoderProfileScope
     fun bindFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory
 }

@@ -11,6 +11,7 @@ import dagger.multibindings.IntoMap
 internal interface ViewModelModule {
     @Binds
     @IntoMap
+    @CodersMainScope
     @ViewModelKey(CodersScreenViewModel::class)
     fun bindViewModel(codersScreenViewModel: CodersScreenViewModel): ViewModel
 }

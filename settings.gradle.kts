@@ -19,5 +19,6 @@ include(":core:common")
 include(":core:network")
 include(":core:design-system")
 include(":core:features:coders")
+include(":core:features:coder-profile")
 
  

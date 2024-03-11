@@ -1,25 +1,18 @@
 plugins {
-    id(Plugins.androidApplication)
+    id(Plugins.androidLibrary)
     id(Plugins.kotlinAndroid)
     id(Plugins.kapt)
 }
 
 android {
-    namespace = Project.nameSpace
+    namespace = "com.thindie.coder_profile"
     compileSdk = Config.compileSdk
 
     defaultConfig {
-        applicationId = Project.appId
         minSdk = Config.minSdk
-        targetSdk =  Config.targetSdk
-        versionCode = Config.versionCode
-        versionName = Config.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
-        multiDexEnabled = true
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -29,7 +22,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
@@ -48,17 +40,9 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.0"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
-
-
-
     //lifecycle
     implementation(Dependencies.Lifecycle.core)
     implementation(Dependencies.Lifecycle.lifecycleRuntime)
@@ -79,6 +63,10 @@ dependencies {
     implementation(Dependencies.Dagger.dagger)
     kapt(Dependencies.Dagger.annotationProcessorCompiler)
 
+    //Network
+
+    implementation(Dependencies.Network.retrofit)
+
     // Testing
     testImplementation(Dependencies.Testing.junit)
     androidTestImplementation(Dependencies.Testing.androidJunit)
@@ -88,13 +76,14 @@ dependencies {
     debugImplementation(Dependencies.Compose.tooling)
     debugImplementation(Dependencies.Compose.manifest)
 
-    // Retrofit
-    implementation(Dependencies.Network.retrofit)
+    //coil
+    implementation(Dependencies.Coil.coil)
 
-    //module
+    //Modules
     implementation(project(Modules.common))
     implementation(project(Modules.network))
-    implementation(project(Modules.featureMain))
     implementation(project(Modules.designSystem))
-    implementation(project(Modules.featureProfile))
+
+
+
 }
