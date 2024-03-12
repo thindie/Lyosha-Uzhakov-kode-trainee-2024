@@ -1,7 +1,7 @@
-package com.thindie.coders.screen.elements.tabrow
+package com.thindie.coders.presentation.elements.tabrow
 
 import androidx.annotation.StringRes
-import com.thindie.coders.events.CodersScreenViewModelEvent
+import com.thindie.coders.presentation.events.CodersScreenViewModelEvent
 import com.thindie.model.Department
 
 internal data class TabRowUnit(

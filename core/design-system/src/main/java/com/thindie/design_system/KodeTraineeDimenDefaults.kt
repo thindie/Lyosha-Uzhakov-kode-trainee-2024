@@ -46,6 +46,8 @@ object KodeTraineeDimenDefaults {
 
     object SearchBar {
         val height by lazy { cut.times(10) }
+        const val defaultSize = 1f
+        const val adjustedSize = 0.7f
     }
 
     object ProfileInfoBar {

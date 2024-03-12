@@ -15,8 +15,8 @@ fun UnsuccessfullSearchSnippet(modifier: Modifier = Modifier, onClick: () -> Uni
     BaseUtilSnippet(
         modifier = modifier,
         painter = KodeTraineeDrawable.SearchResultSnippet.glass.painter(),
-        textHeadline = KodeTraineeStrings.SearchFail.nothingFound.string(),
-        textLabel = KodeTraineeStrings.SearchFail.tryCorrectRequest.string(),
+        textHeadline = KodeTraineeStrings.SearchFailScreenSnippet.nothingFound.string(),
+        textLabel = KodeTraineeStrings.SearchFailScreenSnippet.tryCorrectRequest.string(),
         textClickable = "",
         isClickable = false
     )

@@ -1,4 +1,4 @@
-package com.thindie.coders.screen.elements.tabrow
+package com.thindie.coders.presentation.elements.tabrow
 
 import com.thindie.design_system.KodeTraineeStrings
 import com.thindie.model.Department
