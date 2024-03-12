@@ -19,11 +19,6 @@ internal sealed interface CodersScreenViewModelEvent {
 
     data object OnBottomSheetDismiss : CodersScreenViewModelEvent
 
-    data object OnBottomSheetInvoke: CodersScreenViewModelEvent
-
-    data object OnBottomSheetDismiss: CodersScreenViewModelEvent
-
-
     data class OnClickTabRow(val index: Int, val department: Department) :
         CodersScreenViewModelEvent
 }
