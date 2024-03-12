@@ -21,6 +21,7 @@ object KodeTraineeDimenDefaults {
     private var base = 8.dp
 
     object PaddingValues {
+        val zero by lazy { PaddingValues(0.dp, 0.dp) }
         val standart by lazy { PaddingValues(horizontal = extended, vertical = base) }
         val fullHorizontalCutVertical by lazy { PaddingValues(horizontal = full, vertical = cut) }
     }
@@ -31,6 +32,7 @@ object KodeTraineeDimenDefaults {
         val baseVertical by lazy { base }
         val extendedVertical by lazy { extended }
         val baseHorizontal by lazy { extended }
+        val extendedHorizontal by lazy { full }
     }
 
     object CoderList {
