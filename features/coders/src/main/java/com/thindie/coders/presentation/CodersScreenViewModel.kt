@@ -73,7 +73,11 @@ internal class CodersScreenViewModel @Inject constructor(private val getCodersUs
             }
 
             CodersScreenViewModelEvent.OnClickSearchBarButtonCancel -> {
-                onEvent(CodersScreenViewModelEvent.OnClickClearSearchBarInput(shouldResetSearchBarState = true))
+                onEvent(
+                    CodersScreenViewModelEvent.OnClickClearSearchBarInput(
+                        shouldResetSearchBarState = true
+                    )
+                )
             }
 
 
@@ -89,11 +93,19 @@ internal class CodersScreenViewModel @Inject constructor(private val getCodersUs
             }
 
             CodersScreenViewModelEvent.OnBottomSheetDismiss -> {
-
+                _state.update { codersScreenState ->
+                    codersScreenState.copy(
+                        bottomSheetState = codersScreenState.bottomSheetState.copy(isExpanded = false)
+                    )
+                }
             }
 
             CodersScreenViewModelEvent.OnBottomSheetInvoke -> {
-
+                _state.update { codersScreenState ->
+                    codersScreenState.copy(
+                        bottomSheetState = codersScreenState.bottomSheetState.copy(isExpanded = true)
+                    )
+                }
             }
         }
     }
