@@ -17,6 +17,12 @@ object KodeTraineeStrings {
         val cancelButton = R.string.search_bar_cancel_textbutton
     }
 
+    object BottomSheet {
+        val title = R.string.bottom_sheet_title
+        val alphabet = R.string.bottom_sheet_option_alphabet
+        val date = R.string.bottom_sheet_option_birthday
+    }
+
     object ScrollableTabRow {
         val ios = R.string.department_ios
         val android = R.string.department_android

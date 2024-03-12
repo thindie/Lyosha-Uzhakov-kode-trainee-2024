@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -77,6 +78,44 @@ fun KodeTraineeGenericImageComponentRow(
         content()
     }
 }
+
+
+@Composable
+@Suppress("LongParameterList")
+fun KodeTraineeGenericIconButtonComponentRow(
+    modifier: Modifier = Modifier,
+    painter: Painter,
+    iconTint: Color = MaterialTheme.colorScheme.onBackground,
+    iconSize: Dp = KodeTraineeDimenDefaults.DrawableSize.base,
+    contentSpacing: Dp = KodeTraineeDimenDefaults.Spacing.baseHorizontal,
+    horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
+    verticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
+    onClick: () -> Unit,
+    content: @Composable () -> Unit,
+) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = verticalAlignment,
+        horizontalArrangement = horizontalArrangement
+    ) {
+        IconButton(onClick = onClick) {
+            Icon(
+                modifier = Modifier.size(iconSize),
+                painter = painter,
+                contentDescription = null,
+                tint = iconTint
+            )
+        }
+
+        Spacer(modifier = Modifier.width(contentSpacing))
+        content()
+    }
+}
+
+
+
+
+
 
 private const val PREVIEW = "♦◘╩lJjlMWEQy"
 

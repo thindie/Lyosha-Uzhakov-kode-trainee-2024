@@ -9,6 +9,7 @@ internal data class CodersScreenState(
     val codersList: List<CoderModel>,
     val tabRowState: ScrollableTabRowState,
     val searchBarState: SearchBarState,
+    val bottomSheetState: BottomSheetState,
 ) :
     ViewState {
 
@@ -34,6 +35,9 @@ internal data class CodersScreenState(
                 shouldShowDefaultState = true,
                 fieldValue = "",
                 isSortOrGroupSet = false
+            ), bottomSheetState = BottomSheetState(
+                isExpanded = false,
+                sortType = BottomSheetState.Companion.SortType.DEFAULT
             )
         )
     }
