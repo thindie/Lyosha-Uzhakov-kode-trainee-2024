@@ -1,4 +1,4 @@
-package com.thindie.coders.screen.elements.tabrow
+package com.thindie.coders.presentation.elements.tabrow
 
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton

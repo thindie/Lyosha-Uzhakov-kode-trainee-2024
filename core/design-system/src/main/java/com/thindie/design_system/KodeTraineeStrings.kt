@@ -1,7 +1,5 @@
 package com.thindie.design_system
 
-import androidx.annotation.StringRes
-
 object KodeTraineeStrings {
     object ErrorScreen {
         val uberMind = R.string.error_screen_ubermind
@@ -9,9 +7,14 @@ object KodeTraineeStrings {
         val tryAgain = R.string.error_screen_try_again
     }
 
-    object SearchFail {
+    object SearchFailScreenSnippet {
         val nothingFound = R.string.coders_nothing_found
         val tryCorrectRequest = R.string.coders_nothing_found_correct_request
+    }
+
+    object SearchBar {
+        val placeHolder = R.string.search_bar_placeholder
+        val cancelButton = R.string.search_bar_cancel_textbutton
     }
 
     object ScrollableTabRow {

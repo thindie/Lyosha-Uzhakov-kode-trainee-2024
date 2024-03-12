@@ -1,4 +1,4 @@
-package com.thindie.coders.screen.elements.tabrow
+package com.thindie.coders.presentation.elements.tabrow
 
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.runtime.Composable
@@ -8,7 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.thindie.coders.events.CodersScreenViewModelEvent
+import com.thindie.coders.presentation.events.CodersScreenViewModelEvent
 import com.thindie.design_system.KodeTraineeDimenDefaults
 import com.thindie.design_system.theme.KodeTraineeTheme
 
@@ -28,8 +28,7 @@ internal fun KodeTraineeScrollableTabRow(
         selectedTabIndex = selectedIndex,
         edgePadding = KodeTraineeDimenDefaults.Spacing.extendedVertical
     ) {
-        KodeTraineeTabRowDefaults
-            .tabRowUnitsList
+        KodeTraineeTabRowDefaults.tabRowUnitsList
             .forEachIndexed { index, tabRowUnit ->
 
                 val tabUnitClickEvent by lazy { tabRowUnit.getAsCodersViewModelEvent(index) }
