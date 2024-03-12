@@ -3,6 +3,7 @@ package com.thindie.model
 import kotlin.jvm.Throws
 
 enum class Department {
+    UNSPECIFIED,
     ANDROID,
     IOS,
     DESIGN,
