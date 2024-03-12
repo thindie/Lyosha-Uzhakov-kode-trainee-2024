@@ -34,22 +34,21 @@ fun KodeTraineeGenericIconComponentRow(
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     verticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
     content: @Composable () -> Unit,
-) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = verticalAlignment,
-        horizontalArrangement = horizontalArrangement
-    ) {
+) = KodeTraineeGenericPaintableComponentRow(
+    paintableContent = {
         Icon(
             modifier = Modifier.size(iconSize),
             painter = painter,
             contentDescription = null,
             tint = iconTint
         )
-        Spacer(modifier = Modifier.width(contentSpacing))
-        content()
-    }
-}
+    },
+    modifier = modifier,
+    contentSpacing = contentSpacing,
+    horizontalArrangement = horizontalArrangement,
+    verticalAlignment = verticalAlignment,
+    content = content
+)
 
 
 @Composable
@@ -62,22 +61,20 @@ fun KodeTraineeGenericImageComponentRow(
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     verticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
     content: @Composable () -> Unit,
-) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = verticalAlignment,
-        horizontalArrangement = horizontalArrangement
-    ) {
+) = KodeTraineeGenericPaintableComponentRow(
+    paintableContent = {
         Image(
             modifier = Modifier.size(iconSize),
             painter = painter,
             contentDescription = null,
-
-            )
-        Spacer(modifier = Modifier.width(contentSpacing))
-        content()
-    }
-}
+        )
+    },
+    modifier = modifier,
+    contentSpacing = contentSpacing,
+    horizontalArrangement = horizontalArrangement,
+    verticalAlignment = verticalAlignment,
+    content = content
+)
 
 
 @Composable
@@ -92,12 +89,8 @@ fun KodeTraineeGenericIconButtonComponentRow(
     verticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
     onClick: () -> Unit,
     content: @Composable () -> Unit,
-) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = verticalAlignment,
-        horizontalArrangement = horizontalArrangement
-    ) {
+) = KodeTraineeGenericPaintableComponentRow(
+    paintableContent = {
         IconButton(onClick = onClick) {
             Icon(
                 modifier = Modifier.size(iconSize),
@@ -106,15 +99,35 @@ fun KodeTraineeGenericIconButtonComponentRow(
                 tint = iconTint
             )
         }
+    },
+    modifier = modifier,
+    contentSpacing = contentSpacing,
+    horizontalArrangement = horizontalArrangement,
+    verticalAlignment = verticalAlignment,
+    content = content
+)
 
+
+@Composable
+@Suppress("LongParameterList")
+internal fun KodeTraineeGenericPaintableComponentRow(
+    modifier: Modifier = Modifier,
+    paintableContent: @Composable () -> Unit,
+    contentSpacing: Dp = KodeTraineeDimenDefaults.Spacing.baseHorizontal,
+    horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
+    verticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
+    content: @Composable () -> Unit,
+) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = verticalAlignment,
+        horizontalArrangement = horizontalArrangement
+    ) {
+        paintableContent()
         Spacer(modifier = Modifier.width(contentSpacing))
         content()
     }
 }
-
-
-
-
 
 
 private const val PREVIEW = "♦◘╩lJjlMWEQy"
