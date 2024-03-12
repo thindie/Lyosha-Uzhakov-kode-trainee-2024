@@ -31,11 +31,9 @@ internal data class CodersScreenState(
             tabRowState = ScrollableTabRowState(selectedIndex = 0),
             codersList = emptyList(),
             searchBarState = SearchBarState(
-                isFocused = false,
-                isNotEmpty = false,
-                isTrailingIconActivated = false,
-                isLeadingIconActivated = false,
-                fieldValue = ""
+                shouldShowDefaultState = true,
+                fieldValue = "",
+                isSortOrGroupSet = false
             )
         )
     }

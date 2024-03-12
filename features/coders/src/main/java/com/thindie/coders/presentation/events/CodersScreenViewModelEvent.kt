@@ -6,13 +6,18 @@ internal sealed interface CodersScreenViewModelEvent {
     data object OnClickAlphabetSort : CodersScreenViewModelEvent
     data object OnClickBirthdaySort : CodersScreenViewModelEvent
 
-    data object OnFocusSearchBar : CodersScreenViewModelEvent
+    data class OnClickClearSearchBarInput(val shouldResetSearchBarState: Boolean = false) : CodersScreenViewModelEvent
 
-    data object OnClearSearchBarInput : CodersScreenViewModelEvent
+    data object OnClickSearchBarButtonCancel : CodersScreenViewModelEvent
 
-    data object OnDismissFocusSearchBar : CodersScreenViewModelEvent
+    data class OnSearchBarValueChange(
+        val fieldValue: String,
+        val shouldResetSearchBarState: Boolean = false,
+    ) : CodersScreenViewModelEvent
 
-    data class OnSearchBarValueChange(val fieldValue: String) : CodersScreenViewModelEvent
+    data object OnBottomSheetInvoke : CodersScreenViewModelEvent
+
+    data object OnBottomSheetDismiss : CodersScreenViewModelEvent
 
 
     data class OnClickTabRow(val index: Int, val department: Department) :

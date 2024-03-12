@@ -10,21 +10,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.FocusState
-import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.tooling.preview.Preview
 import com.thindie.coders.presentation.events.CodersScreenViewModelEvent
 import com.thindie.coders.presentation.state.SearchBarState
@@ -42,11 +39,7 @@ import com.thindie.design_system.theme.KodeTraineeTheme
 fun previewKodeTraineeSearchBar() {
     KodeTraineeTheme {
         KodeTraineeSearchBar(modifier = Modifier, searchBarState = SearchBarState(
-            isFocused = false,
-            isNotEmpty = false,
-            isTrailingIconActivated = false,
-            isLeadingIconActivated = false,
-            fieldValue = ""
+            shouldShowDefaultState = false, fieldValue = "", isSortOrGroupSet = false
         ), onEvent = {})
     }
 }
@@ -58,19 +51,22 @@ internal fun KodeTraineeSearchBar(
     searchBarState: SearchBarState,
     onEvent: (CodersScreenViewModelEvent) -> Unit,
 ) {
-    val focusRequester: FocusRequester = remember { FocusRequester() }
-    Row(verticalAlignment = Alignment.CenterVertically, modifier = modifier.animateContentSize()) {
+
+    val keyboardController = LocalSoftwareKeyboardController.current
+
+    Row(
+        modifier = modifier.animateContentSize(),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
         BaseSearchBar(
+            modifier = modifier,
             state = searchBarState,
-            focusRequester = focusRequester,
             onEvent = onEvent,
-            onInternalFocusEvent = { focusState ->
-                onFocusState(focusState, onEvent)
-            })
-        AnimatedVisibility(visible = searchBarState.isFocused) {
+        )
+        AnimatedVisibility(visible = searchBarState.shouldShowDefaultState.not()) {
             TextButton(onClick = {
-                focusRequester.freeFocus()
-                onEvent(CodersScreenViewModelEvent.OnDismissFocusSearchBar)
+                keyboardController?.hide()
+                onEvent(CodersScreenViewModelEvent.OnClickSearchBarButtonCancel)
             }) {
                 Text(text = KodeTraineeStrings.SearchBar.cancelButton.string())
             }
@@ -79,26 +75,20 @@ internal fun KodeTraineeSearchBar(
 
 }
 
-private fun onFocusState(focusState: FocusState, onEvent: (CodersScreenViewModelEvent) -> Unit) {
-    if (focusState.isFocused) {
-        onEvent.invoke(CodersScreenViewModelEvent.OnFocusSearchBar)
-    } else onEvent.invoke(CodersScreenViewModelEvent.OnDismissFocusSearchBar)
-}
-
 
 @Composable
 private fun BaseSearchBar(
     modifier: Modifier = Modifier,
     state: SearchBarState,
-    focusRequester: FocusRequester,
     onEvent: (CodersScreenViewModelEvent) -> Unit,
-    onInternalFocusEvent: (FocusState) -> Unit,
 ) {
-
-
     Row(
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxWidth(
+                if (state.shouldShowDefaultState)
+                    KodeTraineeDimenDefaults.SearchBar.defaultSize
+                else KodeTraineeDimenDefaults.SearchBar.adjustedSize
+            )
             .clip(KodeTraineeShapesDefaults.searchBar)
             .background(Color.LightGray, KodeTraineeShapesDefaults.searchBar)
             .wrapContentHeight(),
@@ -106,18 +96,16 @@ private fun BaseSearchBar(
         horizontalArrangement = Arrangement.Start
     ) {
         OutlinedTextField(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
-                .padding(KodeTraineeDimenDefaults.PaddingValues.standart)
-                .focusRequester(focusRequester)
-                .onFocusChanged(onInternalFocusEvent),
+                .padding(KodeTraineeDimenDefaults.PaddingValues.standart),
             value = state.fieldValue,
             leadingIcon = { SearchIcon(state = state) },
-            trailingIcon = { DismissInputIcon(onEvent = onEvent) },
+            trailingIcon = { VariableTrailingIcon(state = state, onEvent = onEvent) },
             onValueChange = { fieldValue ->
                 onEvent(CodersScreenViewModelEvent.OnSearchBarValueChange(fieldValue))
             },
-            placeholder = { if (state.shouldShowPlaceHolder) SearchBarPlaceHolder() },
+            placeholder = { if (state.shouldShowDefaultState) SearchBarPlaceHolder() },
             singleLine = true,
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = Color.Transparent,
@@ -130,11 +118,21 @@ private fun BaseSearchBar(
 }
 
 @Composable
+private fun VariableTrailingIcon(
+    state: SearchBarState,
+    onEvent: (CodersScreenViewModelEvent) -> Unit,
+) {
+    if (state.shouldShowDefaultState.not()) DismissInputIcon(onEvent = onEvent) else SortOrGroupIcon(
+        state = state,
+        onEvent = onEvent
+    )
+}
+
+@Composable
 private fun SearchIcon(state: SearchBarState) {
 
-    BaseSearchBarIcon(
-        painter = KodeTraineeDrawable.SearchBar.glass.painter(),
-        tint = if (state.isFocused) Color.Black else Color.Gray,
+    BaseSearchBarIcon(painter = KodeTraineeDrawable.SearchBar.glass.painter(),
+        tint = if (state.shouldShowDefaultState.not()) Color.Black else Color.Gray,
         isEnabled = false,
         onEvent = {})
 }
@@ -157,11 +155,25 @@ private fun BaseSearchBarIcon(
 
 }
 
+
+@Composable
+private fun SortOrGroupIcon(state: SearchBarState, onEvent: (CodersScreenViewModelEvent) -> Unit) {
+    BaseSearchBarIcon(painter = KodeTraineeDrawable.SearchBar.options.painter(),
+        isEnabled = true,
+        tint = if (state.isSortOrGroupSet) MaterialTheme.colorScheme.primary else Color.Gray,
+        onEvent = { onEvent(CodersScreenViewModelEvent.OnBottomSheetInvoke) })
+}
+
 @Composable
 private fun DismissInputIcon(onEvent: (CodersScreenViewModelEvent) -> Unit) {
-    BaseSearchBarIcon(
-        painter = KodeTraineeDrawable.SearchBar.cancel.painter(),
+    BaseSearchBarIcon(painter = KodeTraineeDrawable.SearchBar.cancel.painter(),
         isEnabled = true,
         tint = Color.Gray,
-        onEvent = { onEvent(CodersScreenViewModelEvent.OnClearSearchBarInput) })
+        onEvent = {
+            onEvent(
+                CodersScreenViewModelEvent.OnClickClearSearchBarInput(
+                    shouldResetSearchBarState = false
+                )
+            )
+        })
 }

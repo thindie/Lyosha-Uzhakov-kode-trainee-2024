@@ -47,14 +47,13 @@ internal class CodersScreenViewModel @Inject constructor(private val getCodersUs
 
     fun onEvent(event: CodersScreenViewModelEvent) {
         when (event) {
-            CodersScreenViewModelEvent.OnClearSearchBarInput -> {
-                _state.update { codersScreenState ->
-                    codersScreenState.copy(
-                        searchBarState = codersScreenState.searchBarState.copy(
-                            fieldValue = ""
-                        )
+            is CodersScreenViewModelEvent.OnClickClearSearchBarInput -> {
+                onEvent(
+                    CodersScreenViewModelEvent.OnSearchBarValueChange(
+                        fieldValue = "",
+                        shouldResetSearchBarState = event.shouldResetSearchBarState
                     )
-                }
+                )
             }
 
             CodersScreenViewModelEvent.OnClickAlphabetSort -> {
@@ -73,34 +72,28 @@ internal class CodersScreenViewModel @Inject constructor(private val getCodersUs
                 }
             }
 
-            CodersScreenViewModelEvent.OnDismissFocusSearchBar -> {
-                _state.update { codersScreenState ->
-                    codersScreenState.copy(
-                        searchBarState = codersScreenState.searchBarState.copy(
-                            isFocused = false
-                        )
-                    )
-                }
+            CodersScreenViewModelEvent.OnClickSearchBarButtonCancel -> {
+                onEvent(CodersScreenViewModelEvent.OnClickClearSearchBarInput(shouldResetSearchBarState = true))
             }
 
-            CodersScreenViewModelEvent.OnFocusSearchBar -> {
-                _state.update { codersScreenState ->
-                    codersScreenState.copy(
-                        searchBarState = codersScreenState.searchBarState.copy(
-                            isFocused = true
-                        )
-                    )
-                }
-            }
 
             is CodersScreenViewModelEvent.OnSearchBarValueChange -> {
                 _state.update { codersScreenState ->
                     codersScreenState.copy(
                         searchBarState = codersScreenState.searchBarState.copy(
-                            fieldValue = event.fieldValue
+                            fieldValue = event.fieldValue,
+                            shouldShowDefaultState = event.shouldResetSearchBarState
                         )
                     )
                 }
+            }
+
+            CodersScreenViewModelEvent.OnBottomSheetDismiss -> {
+
+            }
+
+            CodersScreenViewModelEvent.OnBottomSheetInvoke -> {
+
             }
         }
     }
