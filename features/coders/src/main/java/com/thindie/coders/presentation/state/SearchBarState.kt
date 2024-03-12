@@ -6,8 +6,8 @@ import androidx.compose.runtime.getValue
 internal data class SearchBarState(
     val isFocused: Boolean,
     val isNotEmpty: Boolean,
-    val isTrailingIconActivated: Boolean,
     val isLeadingIconActivated: Boolean,
+    val isSortOrGroupSet: Boolean,
     val fieldValue: String,
 ) {
 

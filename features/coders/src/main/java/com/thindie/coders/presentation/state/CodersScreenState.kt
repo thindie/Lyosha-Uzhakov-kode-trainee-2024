@@ -33,9 +33,9 @@ internal data class CodersScreenState(
             searchBarState = SearchBarState(
                 isFocused = false,
                 isNotEmpty = false,
-                isTrailingIconActivated = false,
                 isLeadingIconActivated = false,
-                fieldValue = ""
+                fieldValue = "",
+                isSortOrGroupSet = false
             )
         )
     }

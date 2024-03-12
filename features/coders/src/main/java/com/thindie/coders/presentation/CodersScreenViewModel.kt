@@ -81,6 +81,7 @@ internal class CodersScreenViewModel @Inject constructor(private val getCodersUs
                         )
                     )
                 }
+                onEvent(CodersScreenViewModelEvent.OnClearSearchBarInput)
             }
 
             CodersScreenViewModelEvent.OnFocusSearchBar -> {
@@ -94,13 +95,22 @@ internal class CodersScreenViewModel @Inject constructor(private val getCodersUs
             }
 
             is CodersScreenViewModelEvent.OnSearchBarValueChange -> {
+
                 _state.update { codersScreenState ->
                     codersScreenState.copy(
                         searchBarState = codersScreenState.searchBarState.copy(
-                            fieldValue = event.fieldValue
+                            fieldValue = event.fieldValue,
+                            isFocused = event.fieldValue.isNotBlank()
                         )
                     )
                 }
+            }
+
+            CodersScreenViewModelEvent.OnBottomSheetDismiss -> {
+
+            }
+            CodersScreenViewModelEvent.OnBottomSheetInvoke -> {
+
             }
         }
     }

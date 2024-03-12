@@ -14,6 +14,10 @@ internal sealed interface CodersScreenViewModelEvent {
 
     data class OnSearchBarValueChange(val fieldValue: String) : CodersScreenViewModelEvent
 
+    data object OnBottomSheetInvoke: CodersScreenViewModelEvent
+
+    data object OnBottomSheetDismiss: CodersScreenViewModelEvent
+
 
     data class OnClickTabRow(val index: Int, val department: Department) :
         CodersScreenViewModelEvent
