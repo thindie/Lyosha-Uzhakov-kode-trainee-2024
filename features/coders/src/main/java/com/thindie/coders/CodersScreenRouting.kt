@@ -2,6 +2,8 @@ package com.thindie.coders
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -23,6 +25,7 @@ import com.thindie.coders.internal_navigation.birthdayRoute
 import com.thindie.coders.internal_navigation.defaultRoute
 import com.thindie.coders.presentation.CodersScreenViewModel
 import com.thindie.coders.presentation.elements.bottomsheet.KodeTraineeBottomSheet
+import com.thindie.coders.presentation.elements.codersList.CoderListUnit
 import com.thindie.coders.presentation.elements.searchbar.KodeTraineeSearchBar
 import com.thindie.coders.presentation.elements.tabrow.KodeTraineeScrollableTabRow
 import com.thindie.common.KodeTraineeCommon
@@ -37,6 +40,8 @@ fun NavGraphBuilder.codersRoute() {
 
             val viewModel: CodersScreenViewModel =
                 viewModel(factory = daggerComponent.provideFactory())
+
+            viewModel.getCoders()
 
             val navController = rememberNavController()
             val uiState by viewModel.state.collectAsStateWithLifecycle(minActiveState = Lifecycle.State.RESUMED)
@@ -97,11 +102,11 @@ internal fun NavGraphBuilder.defaultRoute(
 
         val uiState by viewModel.state.collectAsStateWithLifecycle(minActiveState = Lifecycle.State.RESUMED)
 
-        Column {
+        Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
 
 
             uiState.codersList.forEach {
-                Text(text = it.id)
+                CoderListUnit(coderModel = it)
             }
         }
     }

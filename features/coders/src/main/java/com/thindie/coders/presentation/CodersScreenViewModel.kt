@@ -34,7 +34,7 @@ internal class CodersScreenViewModel @Inject constructor(private val getCodersUs
         _state.loading()
     }
 
-    private fun getCoders() {
+    fun getCoders() {
         requestResultAndParse(request = getCodersUseCase::get, onSuccess = {
             _state.update { stateToUpdate ->
                 _state.success()
