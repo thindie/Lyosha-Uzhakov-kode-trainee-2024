@@ -10,7 +10,7 @@ import dagger.Component
 @CoderProfileScope
 @Component(
     dependencies = [DependenciesProvider::class],
-    modules = [ViewModelFactoryModule::class, ViewModelModule::class]
+    modules = [ViewModelFactoryModule::class, ViewModelModule::class, RepositoryModule::class]
 )
 interface CoderProfileComponent {
     companion object {

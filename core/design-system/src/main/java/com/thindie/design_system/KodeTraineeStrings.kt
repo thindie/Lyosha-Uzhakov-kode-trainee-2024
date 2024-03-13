@@ -38,4 +38,11 @@ object KodeTraineeStrings {
         val analytics = R.string.department_analytics
         val all = R.string.departmens
     }
+
+    object CoderProfile {
+        val ageEnded1 = R.string.profile_year_suffix_ru_locale_opt1
+        val ageEnded2_4 = R.string.profile_year_suffix__ru_locale_opt2
+        val ageEnded5_0 = R.string.profile_year_suffix_ru_locale_opt0
+        val stub = R.string.profile_year_suffix__ru_locale_stub
+    }
 }

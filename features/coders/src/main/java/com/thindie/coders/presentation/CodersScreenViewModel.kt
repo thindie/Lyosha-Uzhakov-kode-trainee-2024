@@ -12,6 +12,7 @@ import com.thindie.common.coreartifacts.loading
 import com.thindie.common.coreartifacts.requestResultAndParse
 import com.thindie.common.coreartifacts.subscribeControlledStateFlow
 import com.thindie.common.coreartifacts.success
+import com.thindie.model.NotExpectedSideEffectInside
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -35,6 +36,7 @@ internal class CodersScreenViewModel @Inject constructor(private val getCodersUs
     }
 
     fun getCoders() {
+        @NotExpectedSideEffectInside("Encapsulated current VM state management")
         requestResultAndParse(request = getCodersUseCase::get, onSuccess = {
             _state.update { stateToUpdate ->
                 _state.success()

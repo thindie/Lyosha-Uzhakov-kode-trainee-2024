@@ -58,6 +58,7 @@ object KodeTraineeDimenDefaults {
         val base by lazy { extended.times(2) }
         val medium by lazy { base.times(7) }
         val large by lazy { extended.times(6) }
+        val extraLarge by lazy { base.times(13) }
     }
 
     @Composable

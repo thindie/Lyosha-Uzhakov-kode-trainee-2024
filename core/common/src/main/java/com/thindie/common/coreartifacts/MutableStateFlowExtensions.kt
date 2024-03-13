@@ -11,21 +11,21 @@ import kotlinx.coroutines.flow.update
 private const val SUBSCRIBE_TIME = 5_000L
 
 private val whileSubscribed = SharingStarted.WhileSubscribed(SUBSCRIBE_TIME)
-
+@Suppress("UNCHECKED_CAST")
 fun <T : ViewState> MutableStateFlow<T>.loading() {
     update {
         it.onLoading() as T
     }
 }
 
-
+@Suppress("UNCHECKED_CAST")
 fun <T : ViewState> MutableStateFlow<T>.error() {
     update {
         it.onError() as T
     }
 }
 
-
+@Suppress("UNCHECKED_CAST")
 fun <T : ViewState> MutableStateFlow<T>.success() {
     update {
         it.onSuccess() as T
