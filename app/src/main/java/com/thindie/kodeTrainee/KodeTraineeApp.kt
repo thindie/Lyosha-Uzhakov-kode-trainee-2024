@@ -10,6 +10,7 @@ import com.thindie.coder_profile.coderProfileRoute
 import com.thindie.coders.codersRoute
 import com.thindie.common.KodeTraineeCommon
 import com.thindie.kodeTrainee.navigation_utils.allCodersRoute
+import com.thindie.kodeTrainee.navigation_utils.coderProfileRoute
 
 @Composable
 fun KodeTraineeApp() {
@@ -22,7 +23,7 @@ fun KodeTraineeApp() {
             navController = navController,
             startDestination = KodeTraineeCommon.FeatureDestinations.codersSummary
         ) {
-            codersRoute(onClickCoder = {})
+            codersRoute(onClickCoder = { navController.coderProfileRoute(it.id) })
             coderProfileRoute(onClickBack = navController::allCodersRoute)
         }
     }

@@ -14,6 +14,6 @@ internal fun NavController.allCodersRoute() {
     forward(KodeTraineeCommon.FeatureDestinations.codersSummary)
 }
 
-internal fun NavController.coderProfileRoute() {
-    forward(KodeTraineeCommon.FeatureDestinations.coderProfile)
+internal fun NavController.coderProfileRoute(id: String) {
+    forward(KodeTraineeCommon.FeatureDestinations.argumentCoderProfile(id))
 }

@@ -97,4 +97,5 @@ dependencies {
     implementation(project(Modules.featureMain))
     implementation(project(Modules.designSystem))
     implementation(project(Modules.featureProfile))
+    implementation(project(Modules.model))
 }
