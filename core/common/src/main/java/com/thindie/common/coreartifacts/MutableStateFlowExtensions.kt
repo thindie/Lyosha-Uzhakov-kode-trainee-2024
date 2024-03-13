@@ -14,7 +14,7 @@ private val whileSubscribed = SharingStarted.WhileSubscribed(SUBSCRIBE_TIME)
 
 fun <T : ViewState> MutableStateFlow<T>.loading() {
     update {
-        it.onError() as T
+        it.onLoading() as T
     }
 }
 

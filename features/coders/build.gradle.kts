@@ -79,7 +79,8 @@ dependencies {
     //Modules
     implementation(project(Modules.common))
     implementation(project(Modules.designSystem))
-
+    implementation(project(Modules.model))
+    implementation(project(Modules.network))
 
 
 }

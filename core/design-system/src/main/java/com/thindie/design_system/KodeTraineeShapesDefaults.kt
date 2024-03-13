@@ -14,7 +14,7 @@ object KodeTraineeShapesDefaults {
 
     private const val cornerRoundPx = 10f
 
-    private var cornerRadius = 10.dp
+    private var cornerRadius = 30.dp
 
     val searchBar by lazy { RoundedCornerShape(cornerRadius) }
 

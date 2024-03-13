@@ -22,7 +22,7 @@ fun KodeTraineeApp() {
             navController = navController,
             startDestination = KodeTraineeCommon.FeatureDestinations.codersSummary
         ) {
-            codersRoute()
+            codersRoute(onClickCoder = {})
             coderProfileRoute(onClickBack = navController::allCodersRoute)
         }
     }

@@ -10,7 +10,7 @@ inline fun <T, R> LazyListScope.itemsMap(
     map: Map<T, R>,
     noinline key: ((item: R) -> Any)? = null,
     noinline contentType: (item: R) -> Any? = { null },
-    crossinline headerContent: @Composable LazyItemScope.(item: T) -> Unit,
+    crossinline headerContent: @Composable (item: T) -> Unit,
     crossinline itemsContent: @Composable LazyItemScope.(item: R) -> Unit,
 ) {
     map.forEach {
