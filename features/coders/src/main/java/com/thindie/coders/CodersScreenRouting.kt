@@ -2,11 +2,8 @@ package com.thindie.coders
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -22,18 +20,22 @@ import com.thindie.coders.di.CodersMainComponent
 import com.thindie.coders.internal_navigation.InternalFeatureRouting
 import com.thindie.coders.internal_navigation.alphabetRoute
 import com.thindie.coders.internal_navigation.birthdayRoute
-import com.thindie.coders.internal_navigation.defaultRoute
 import com.thindie.coders.presentation.CodersScreenViewModel
+import com.thindie.coders.presentation.elements.alphabetRoute
+import com.thindie.coders.presentation.elements.birthdayRoute
 import com.thindie.coders.presentation.elements.bottomsheet.KodeTraineeBottomSheet
-import com.thindie.coders.presentation.elements.codersList.CoderListUnit
+import com.thindie.coders.presentation.elements.defaultRoute
 import com.thindie.coders.presentation.elements.searchbar.KodeTraineeSearchBar
 import com.thindie.coders.presentation.elements.tabrow.KodeTraineeScrollableTabRow
+import com.thindie.coders.presentation.events.CodersScreenViewModelEvent
 import com.thindie.common.KodeTraineeCommon
 import com.thindie.common.getAppContract
 import com.thindie.design_system.util_ui_snippets.ErrorScreen
+import com.thindie.model.NotExpectedSideEffectInside
+import com.thindie.model.coders.CoderModel
 
 @OptIn(ExperimentalMaterial3Api::class)
-fun NavGraphBuilder.codersRoute() {
+fun NavGraphBuilder.codersRoute(onClickCoder: (CoderModel) -> Unit) {
     composable(route = KodeTraineeCommon.FeatureDestinations.codersSummary) {
         val daggerComponent = initFeatureDaggerComponent()
         if (daggerComponent != null) {
@@ -65,18 +67,15 @@ fun NavGraphBuilder.codersRoute() {
                 ) {
                     defaultRoute(
                         viewModel = viewModel,
-                        onClickAlphabet = navController::alphabetRoute,
-                        onClickBirthday = navController::birthdayRoute
+                        onClickCoder = onClickCoder
                     )
                     birthdayRoute(
                         viewModel = viewModel,
-                        onClickAlphabet = navController::alphabetRoute,
-                        onClickBirthday = navController::birthdayRoute
+                        onClickCoder = onClickCoder
                     )
                     alphabetRoute(
                         viewModel = viewModel,
-                        onClickBirthday = navController::birthdayRoute,
-                        onClickDefault = navController::defaultRoute
+                        onClickCoder = onClickCoder
                     )
                 }
             }
@@ -84,7 +83,12 @@ fun NavGraphBuilder.codersRoute() {
                 KodeTraineeBottomSheet(
                     state = uiState.bottomSheetState,
                     modalSheetState = modalBottomSheetState,
-                    onEvent = viewModel::onEvent
+                    onEvent = {
+                        @NotExpectedSideEffectInside("It can navigate through feature")
+                        viewModel.onEvent(
+                            onBottomSheetEvent(it, navController)
+                        )
+                    }
                 )
             }
 
@@ -93,44 +97,26 @@ fun NavGraphBuilder.codersRoute() {
     }
 }
 
-internal fun NavGraphBuilder.defaultRoute(
-    viewModel: CodersScreenViewModel,
-    onClickAlphabet: () -> Unit,
-    onClickBirthday: () -> Unit,
-) {
-    composable(route = InternalFeatureRouting.defaultRoute) {
 
-        val uiState by viewModel.state.collectAsStateWithLifecycle(minActiveState = Lifecycle.State.RESUMED)
-
-        Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-
-
-            uiState.codersList.forEach {
-                CoderListUnit(coderModel = it)
-            }
+private fun onBottomSheetEvent(
+    event: CodersScreenViewModelEvent,
+    navController: NavController,
+): CodersScreenViewModelEvent {
+    return when (event) {
+        CodersScreenViewModelEvent.OnClickAlphabetSort -> {
+            navController.alphabetRoute()
+            event
         }
+
+        CodersScreenViewModelEvent.OnClickBirthdaySort -> {
+            navController.birthdayRoute()
+            event
+        }
+
+        else -> event
     }
 }
 
-internal fun NavGraphBuilder.alphabetRoute(
-    viewModel: CodersScreenViewModel,
-    onClickBirthday: () -> Unit,
-    onClickDefault: () -> Unit,
-) {
-    composable(route = InternalFeatureRouting.alphabetRoute) {
-
-    }
-}
-
-internal fun NavGraphBuilder.birthdayRoute(
-    viewModel: CodersScreenViewModel,
-    onClickAlphabet: () -> Unit,
-    onClickBirthday: () -> Unit,
-) {
-    composable(route = InternalFeatureRouting.birthdayRoute) {
-
-    }
-}
 
 @Composable
 internal fun initFeatureDaggerComponent(): CodersMainComponent? {
