@@ -5,17 +5,17 @@ import com.thindie.coder_profile.domain.CoderProfileRepository
 import com.thindie.common.timemanagement.TimeOperator
 import com.thindie.model.RussianAgePostfix
 import com.thindie.model.coder_profile.CoderProfileModel
-import com.thindie.network.ServiceProvider
+import com.thindie.network.RemoteSourceAdapter
 import javax.inject.Inject
 
 @CoderProfileScope
 internal class CoderProfileRepositoryImpl @Inject constructor(
-    private val serviceProvider: ServiceProvider,
+    private val adapter: RemoteSourceAdapter,
     private val timeOperator: TimeOperator,
 ) :
     CoderProfileRepository {
     override suspend fun getCoderProfile(id: String): Result<CoderProfileModel> {
-        return serviceProvider.getRemoteSourceAdapter().getCodersDtoList {
+        return adapter.getCodersDtoList {
             val age = getAge(it.getDtoBirthday())
             CoderProfileModel(
                 avatarUrl = it.getDtoAvatarLink(),
@@ -26,6 +26,7 @@ internal class CoderProfileRepositoryImpl @Inject constructor(
                 userTag = it.getDtoUserTag(),
                 phoneNumber = it.getDtoPhone(),
                 age = age,
+                formattedBirthdayString = it.getDtoBirthday(),
                 russianAgePostfix = getRussianAgeLogicalPostfix(age)
 
             )
@@ -34,12 +35,12 @@ internal class CoderProfileRepositoryImpl @Inject constructor(
         }
     }
 
-   private fun getRussianAgeLogicalPostfix(age: Int): RussianAgePostfix {
+    private fun getRussianAgeLogicalPostfix(age: Int): RussianAgePostfix {
         require(age > -1 && age < 120)
         return RussianAgePostfix.Stub
     }
 
-   private fun getAge(stringDateRepresent: String): Int {
+    private fun getAge(stringDateRepresent: String): Int {
         return 23
     }
 }

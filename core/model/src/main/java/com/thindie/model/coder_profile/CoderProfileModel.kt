@@ -11,6 +11,7 @@ data class CoderProfileModel(
     val userTag: String,
     val phoneNumber: String,
     val age: Int,
+    val formattedBirthdayString: String,
     val russianAgePostfix: RussianAgePostfix,
 ) {
     fun getFullName() = firstName
