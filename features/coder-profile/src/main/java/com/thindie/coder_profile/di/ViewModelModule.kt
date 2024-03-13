@@ -1,7 +1,7 @@
 package com.thindie.coder_profile.di
 
 import androidx.lifecycle.ViewModel
-import com.thindie.coder_profile.CoderProfileScreenViewModel
+import com.thindie.coder_profile.presentation.CoderProfileScreenViewModel
 import com.thindie.common.di.ViewModelKey
 import dagger.Binds
 import dagger.Module
