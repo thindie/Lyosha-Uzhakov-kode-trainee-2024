@@ -31,7 +31,8 @@ internal data class CoderProfileScreenState(
             userTag = "",
             phoneNumber = "",
             age = 0,
-            russianAgePostfix = RussianAgePostfix.Stub
+            russianAgePostfix = RussianAgePostfix.Stub,
+            formattedBirthdayString = ""
         )
         )
     }
