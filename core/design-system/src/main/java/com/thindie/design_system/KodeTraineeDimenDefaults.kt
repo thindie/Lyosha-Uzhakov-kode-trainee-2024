@@ -38,6 +38,7 @@ object KodeTraineeDimenDefaults {
     object CoderList {
         val height by lazy { base.times(10) }
         val imageSize by lazy { extended.times(6) }
+        val stickyHeader by lazy { cut.times(17) }
     }
 
     object BottomSheet {
