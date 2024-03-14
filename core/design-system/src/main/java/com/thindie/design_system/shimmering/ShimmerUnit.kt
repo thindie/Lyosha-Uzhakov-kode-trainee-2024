@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.tooling.preview.Preview
 import com.thindie.design_system.KodeTraineeDimenDefaults
 import com.thindie.design_system.theme.KodeTraineeTheme
@@ -26,7 +27,7 @@ import com.thindie.design_system.theme.KodeTraineeTheme
 @Composable
 fun KodeTraineeShimmerListUnit(modifier: Modifier = Modifier, brush: Brush) {
     Row(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .height(KodeTraineeDimenDefaults.CoderList.height),
         horizontalArrangement = Arrangement.spacedBy(KodeTraineeDimenDefaults.Spacing.cutHorizontal),
@@ -39,7 +40,7 @@ fun KodeTraineeShimmerListUnit(modifier: Modifier = Modifier, brush: Brush) {
                 .clip(MaterialTheme.shapes.extraLarge)
         )
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxHeight()
                 .wrapContentWidth(),
             verticalArrangement = Arrangement.Center,
@@ -74,6 +75,9 @@ fun previewKodeTraineeShimmerListUnit() {
         Column(modifier = Modifier.fillMaxWidth()) {
             repeat(5) {
                 KodeTraineeShimmerListUnit(brush = state.animatedBrush)
+                KodeTraineeShimmerListUnit(
+                    modifier = Modifier.shimmerEffect(shape = MaterialTheme.shapes.extraLarge),
+                    brush = SolidColor(Color.Transparent))
                 Spacer(modifier = Modifier.height(KodeTraineeDimenDefaults.Spacing.cutVertical))
             }
         }

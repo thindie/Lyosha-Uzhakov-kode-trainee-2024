@@ -4,6 +4,7 @@ import com.thindie.common.timemanagement.TimeOperator
 import com.thindie.common.timemanagement.TimeOperatorFormatter
 import java.time.Instant
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Inject
@@ -46,6 +47,16 @@ internal class TimeOperatorImpl @Inject constructor(
 
     override fun getTimeFormatter(): TimeOperatorFormatter {
         return timeOperatorFormatter
+    }
+
+    override fun getMillisFromStringDate(date: String, pattern: String): Long {
+        return try {
+            val dateFormatter = DateTimeFormatter.ofPattern(pattern)
+            val localDateTime = LocalDateTime.parse(date, dateFormatter)
+            localDateTime.toEpochSecond(ZoneOffset.from(getLocalDateTime(timeZone)))
+        } catch (_: Exception) {
+            0L
+        }
     }
 
 

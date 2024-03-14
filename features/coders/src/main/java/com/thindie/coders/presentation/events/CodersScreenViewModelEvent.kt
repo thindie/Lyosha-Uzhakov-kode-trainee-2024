@@ -3,6 +3,8 @@ package com.thindie.coders.presentation.events
 import com.thindie.model.Department
 
 internal sealed interface CodersScreenViewModelEvent {
+
+    data object OnRefreshRequest: CodersScreenViewModelEvent
     data object OnClickAlphabetSort : CodersScreenViewModelEvent
     data object OnClickBirthdaySort : CodersScreenViewModelEvent
 

@@ -25,10 +25,24 @@ fun SimpleShimmer(modifier: Modifier = Modifier) {
     }
 }
 
+
+@Composable
+fun SimpleShimmerModifier(modifier: Modifier = Modifier) {
+
+    Column {
+        Spacer(
+            modifier = modifier
+                .size(KodeTraineeDimenDefaults.DrawableSize.large)
+                .shimmerEffect(MaterialTheme.shapes.extraLarge)
+        )
+    }
+}
+
 @Composable
 @Preview
 fun previewSimpleShimmer() {
     KodeTraineeTheme {
         SimpleShimmer()
+        SimpleShimmerModifier()
     }
 }

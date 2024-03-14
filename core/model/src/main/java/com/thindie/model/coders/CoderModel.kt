@@ -8,6 +8,8 @@ data class CoderModel(
     val yearOfNearestCelebrate: Int,
     val department: Department,
     val firstName: String,
+    val birthdayMillis: Long,
+    val birthday: String,
     val id: String,
     val lastName: String,
     val position: String,
