@@ -78,14 +78,14 @@ object KodeTraineeTypographyDefaults {
     private val bodyFont = Font(R.font.inter)
     val bodyFamily = bodyFont.toFontFamily()
 
-    private val displayFont = Font(R.font.inter)
-    val displayFamily = displayFont.toFontFamily()
-
     private val titleFont = Font(R.font.inter)
     val titleFamily = titleFont.toFontFamily()
 
     private val headLineFont = Font(R.font.inter)
     val headLineFamily = headLineFont.toFontFamily()
+
+    private val displayFont = Font(R.font.inter)
+    val displayFamily = displayFont.toFontFamily()
 
     @Composable
     fun adjustFontsSizeInPixelsToSp(density: Density) {

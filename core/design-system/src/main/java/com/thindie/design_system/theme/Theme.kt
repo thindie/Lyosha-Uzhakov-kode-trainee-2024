@@ -11,8 +11,10 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.thindie.design_system.KodeTraineeDimenDefaults
 import com.thindie.design_system.KodeTraineeShapesDefaults
 
 
@@ -59,13 +61,11 @@ fun KodeTraineeTheme(
     content: @Composable () -> Unit,
 ) {
 
-    /*
-        val density = LocalDensity.current
+/*        val density = LocalDensity.current
         KodeTraineeDimenDefaults.adjustPixelsToDp(density = density)
         KodeTraineeTypographyDefaults.adjustFontsSizeInPixelsToSp(density = density)
         KodeTraineeShapesDefaults.adjustShapes(density = density)
-        KodeTraineeShapesDefaults.adjustShapes(density = density)
-    */
+        KodeTraineeShapesDefaults.adjustShapes(density = density)*/
 
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
