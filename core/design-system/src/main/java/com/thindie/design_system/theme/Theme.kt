@@ -11,10 +11,8 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import com.thindie.design_system.KodeTraineeDimenDefaults
 import com.thindie.design_system.KodeTraineeShapesDefaults
 
 
@@ -50,9 +48,6 @@ private val LightColors = lightColorScheme(
     scrim = md_theme_light_scrim,
 )
 
-
-val seedColor = Color(0xFF389CD4)
-
 @Composable
 fun KodeTraineeTheme(
     darkTheme: Boolean = false,
@@ -61,21 +56,7 @@ fun KodeTraineeTheme(
     content: @Composable () -> Unit,
 ) {
 
-/*        val density = LocalDensity.current
-        KodeTraineeDimenDefaults.adjustPixelsToDp(density = density)
-        KodeTraineeTypographyDefaults.adjustFontsSizeInPixelsToSp(density = density)
-        KodeTraineeShapesDefaults.adjustShapes(density = density)
-        KodeTraineeShapesDefaults.adjustShapes(density = density)*/
 
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> LightColors
-        else -> LightColors
-    }
     val view = LocalView.current
 
     if (!view.isInEditMode) {
@@ -83,12 +64,12 @@ fun KodeTraineeTheme(
             val window = (view.context as Activity).window
             window.statusBarColor = md_theme_light_background.toArgb()
 
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme.not()
         }
     }
 
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = LightColors,
         typography = Typography,
         content = content,
         shapes = KodeTraineeShapesDefaults.getMaterailShapes()

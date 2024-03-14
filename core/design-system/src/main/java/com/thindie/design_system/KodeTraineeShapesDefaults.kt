@@ -10,9 +10,6 @@ import androidx.compose.ui.unit.dp
 //due minimum shape variants its hardcoded
 object KodeTraineeShapesDefaults {
 
-    private var isAdjusted = false
-
-    private const val cornerRoundPx = 10f
 
     private var cornerRadius = 10.dp
 
@@ -31,14 +28,6 @@ object KodeTraineeShapesDefaults {
 
     val snackBar by lazy { searchBar }
 
-    @Composable
-    fun adjustShapes(density: Density) {
-        if (isAdjusted.not()) {
-            cornerRadius = convertPixelsToDp(pixels = cornerRoundPx, density = density)
-            isAdjusted = true
-        }
-
-    }
 
     // Material theme Variant
     @Composable
