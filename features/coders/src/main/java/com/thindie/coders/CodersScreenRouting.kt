@@ -30,6 +30,7 @@ import com.thindie.coders.presentation.elements.tabrow.KodeTraineeScrollableTabR
 import com.thindie.coders.presentation.events.CodersScreenViewModelEvent
 import com.thindie.common.KodeTraineeCommon
 import com.thindie.common.getAppContract
+import com.thindie.design_system.KodeTraineeDimenDefaults
 import com.thindie.design_system.util_ui_snippets.ErrorScreen
 import com.thindie.model.NotExpectedSideEffectInside
 import com.thindie.model.coders.CoderModel
@@ -52,8 +53,11 @@ fun NavGraphBuilder.codersRoute(onClickCoder: (CoderModel) -> Unit) {
             Scaffold(topBar = {
                 Column {
                     KodeTraineeSearchBar(
-                        searchBarState = uiState.searchBarState, onEvent = viewModel::onEvent
+                        modifier = Modifier.padding(KodeTraineeDimenDefaults.PaddingValues.standart),
+                        searchBarState = uiState.searchBarState,
+                        onEvent = viewModel::onEvent
                     )
+
                     KodeTraineeScrollableTabRow(
                         selectedIndex = uiState.tabRowState.selectedIndex,
                         onClickTab = viewModel::onEvent

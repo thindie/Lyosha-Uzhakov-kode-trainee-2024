@@ -1,16 +1,18 @@
 package com.thindie.coder_profile.presentation.screen
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -23,6 +25,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.FontWeight.Companion.W400
+import androidx.compose.ui.text.font.FontWeight.Companion.W500
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.zIndex
@@ -82,25 +88,35 @@ private fun HeaderSection(modifier: Modifier = Modifier, profileModel: CoderProf
     KodeTraineeGenericImageComponentColumn(
         modifier = Modifier
             .wrapContentHeight()
-            .background(MaterialTheme.colorScheme.onBackground)
+            .background(MaterialTheme.colorScheme.primaryContainer)
             .padding(top = KodeTraineeDimenDefaults.Spacing.extendedVertical),
         painter = AsyncImageOrStubGoose(profileModel = profileModel),
+        contentSpacing = KodeTraineeDimenDefaults.Spacing.extendedVertical.times(2),
         imageSize = KodeTraineeDimenDefaults.DrawableSize.extraLarge,
-        contentScale = ContentScale.Fit
+        contentScale = ContentScale.FillBounds
     ) {
         KodeTraineeGenericTextContentColumn(
             modifier = modifier
                 .fillMaxWidth()
-                .height(KodeTraineeDimenDefaults.ProfileInfoBar.height),
+                .height(KodeTraineeDimenDefaults.ProfileScreen.profileInfoTitleHeight),
             text = profileModel.getFullName(),
-            baseElementTextStyle = MaterialTheme.typography.titleLarge,
+            baseElementTextStyle = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.W700),
             slaveText = profileModel.userTag,
-            slaveElementTextStyle = MaterialTheme.typography.labelSmall,
+            slaveElementTextStyle = MaterialTheme.typography.labelMedium.copy(
+                color = MaterialTheme.colorScheme.onPrimaryContainer, fontWeight = W400
+            ),
+            contentSpacingVertical = KodeTraineeDimenDefaults.Spacing.extendedVertical.times(2),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            Text(text = profileModel.position)
+            Text(
+                text = profileModel.position,
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.tertiary,
+                fontWeight = W400
+            )
         }
+        Spacer(modifier = Modifier.height(KodeTraineeDimenDefaults.Spacing.extendedVertical))
     }
 }
 
@@ -119,59 +135,74 @@ private fun TelephoneInfoSnippet(modifier: Modifier = Modifier, profileModel: Co
     val context = LocalContext.current
 
     KodeTraineeGenericIconComponentRow(
-        modifier = modifier.height(KodeTraineeDimenDefaults.ProfileInfoBar.height),
+        modifier = modifier.height(KodeTraineeDimenDefaults.ProfileScreen.profileInfoSnippetHeight),
         painter = KodeTraineeDrawable.Profile.phone.painter(),
         contentSpacing = KodeTraineeDimenDefaults.Spacing.baseHorizontal
     ) {
 
-        Text(modifier = Modifier.clickable {
-            context.startActivity(
-                Intent().apply {
-                    action = Intent.ACTION_DIAL
-                    data = try {
-                        Uri.parse("tel:".plus(profileModel.phoneNumber))
-                    } catch (_: Exception) {
-                        Uri.parse("tel:")
-                    }
-                }
-            )
-        }, text = profileModel.phoneNumber)
-
+        ClickableText(
+            text = AnnotatedString(text = profileModel.phoneNumber),
+            onClick = { dialIntentInvoke(context, profileModel) },
+            style = MaterialTheme.typography.bodyMedium.copy(
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = W500
+            ),
+        )
     }
 }
 
 @Composable
 private fun BirthdayInfoSnippet(modifier: Modifier = Modifier, profileModel: CoderProfileModel) {
     KodeTraineeGenericIconComponentRow(
-        modifier = modifier.height(KodeTraineeDimenDefaults.ProfileInfoBar.height),
+        modifier = modifier.height(KodeTraineeDimenDefaults.ProfileScreen.profileInfoSnippetHeight),
         painter = KodeTraineeDrawable.Profile.star.painter()
     ) {
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            Text(text = profileModel.formattedBirthdayString)
-            Text(text = profileModel.age.toString())
+            Text(
+                text = profileModel.formattedBirthdayString,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = W500
+            )
+            Text(
+                text = profileModel.age.toString(),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                fontWeight = W500
+            )
         }
 
     }
 }
 
+private fun dialIntentInvoke(context: Context, profileModel: CoderProfileModel) {
+    context.startActivity(Intent().apply {
+        action = Intent.ACTION_DIAL
+        data = try {
+            Uri.parse("tel:".plus(profileModel.phoneNumber))
+        } catch (_: Exception) {
+            Uri.parse("tel:")
+        }
+    })
+}
+
 @Composable
 @Preview
 fun previewKodeTraineeCoderProfileScreen() {
-    val state = CoderProfileScreenState.getDefault().coderProfile
-        .copy(
-            avatarUrl = "",
-            firstName = "Can you hear ",
-            id = "",
-            lastName = "the sound",
-            position = "Blasting out in stereo",
-            userTag = "of the static noise",
-            phoneNumber = "Music to my nervous system",
-            age = 0,
-            formattedBirthdayString = "Cater to the class and the paranoid",
-            russianAgePostfix = RussianAgePostfix.Stub
+    val state = CoderProfileScreenState.getDefault().coderProfile.copy(
+        avatarUrl = "",
+        firstName = "Can you hear ",
+        id = "",
+        lastName = "the sound",
+        position = "Blasting out in stereo",
+        userTag = "of the static noise",
+        phoneNumber = "Music to my nervous system",
+        age = 0,
+        formattedBirthdayString = "Cater to the class and the paranoid",
+        russianAgePostfix = RussianAgePostfix.Stub
 
-        )
+    )
     KodeTraineeTheme {
         KodeTraineeCoderProfileScreen(profileModel = state, onClickBack = {})
     }

@@ -2,6 +2,7 @@ package com.thindie.design_system.elements
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -72,7 +73,9 @@ fun KodeTraineeGenericImageComponentRow(
 ) = KodeTraineeGenericPaintableComponentRow(
     paintableContent = {
         Image(
-            modifier = Modifier.size(iconSize).clip(shape),
+            modifier = Modifier
+                .size(iconSize)
+                .clip(shape),
             contentScale = contentScale,
             painter = painter,
             contentDescription = null,
@@ -101,11 +104,10 @@ fun KodeTraineeGenericIconButtonComponentRow(
 ) = KodeTraineeGenericPaintableComponentRow(
     paintableContent = {
         IconButton(onClick = onClick) {
-            Icon(
+            Image(
                 modifier = Modifier.size(iconSize),
                 painter = painter,
                 contentDescription = null,
-                tint = iconTint
             )
         }
     },
@@ -152,14 +154,17 @@ fun KodeTraineeGenericImageComponentColumn(
     content: @Composable () -> Unit,
 ) = KodeTraineeGenericPaintableColumnComponent(
     paintableContent = {
-        Image(
-            modifier = Modifier
-                .size(imageSize)
-                .clip(shape),
-            painter = painter,
-            contentScale = contentScale,
-            contentDescription = null,
-        )
+
+            Image(
+                modifier = Modifier
+                    .width(imageSize)
+                    .height(imageSize)
+                    .clip(shape),
+                painter = painter,
+                contentScale = contentScale,
+                contentDescription = null,
+            )
+
     },
     modifier = modifier,
     contentSpacing = contentSpacing,
