@@ -101,11 +101,10 @@ fun KodeTraineeGenericIconButtonComponentRow(
 ) = KodeTraineeGenericPaintableComponentRow(
     paintableContent = {
         IconButton(onClick = onClick) {
-            Icon(
+            Image(
                 modifier = Modifier.size(iconSize),
                 painter = painter,
                 contentDescription = null,
-                tint = iconTint
             )
         }
     },

@@ -4,7 +4,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 
 //due minimum shape variants its hardcoded
@@ -17,8 +16,8 @@ object KodeTraineeShapesDefaults {
 
     val bottomSheet by lazy {
         RoundedCornerShape(
-            topStart = cornerRadius,
-            topEnd = cornerRadius,
+            topStart = cornerRadius.times(3),
+            topEnd = cornerRadius.times(3),
             bottomStart = 0.dp,
             bottomEnd = 0.dp
         )

@@ -1,8 +1,6 @@
 package com.thindie.design_system
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 
 object KodeTraineeDimenDefaults {
@@ -47,5 +45,9 @@ object KodeTraineeDimenDefaults {
         val medium by lazy { base.times(7) }
         val large by lazy { extended.times(6) }
         val extraLarge by lazy { base.times(13) }
+    }
+
+    object BottomSheet {
+        val section by lazy { cut.times(20) }
     }
 }
