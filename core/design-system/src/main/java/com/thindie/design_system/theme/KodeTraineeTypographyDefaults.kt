@@ -1,75 +1,49 @@
 package com.thindie.design_system.theme
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.toFontFamily
-import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.sp
 import com.thindie.design_system.R
-import com.thindie.design_system.convertPixelsToSp
 
 object KodeTraineeTypographyDefaults {
 
-    private var isAdjusted = false
 
-    private const val title1Px = 24f //titleLarge
-    private const val title1PxLineHeight = 28f
-
-    private const val title2Px = 20f //titleMedium
-    private const val title2PxLineHeight = 24f
-
-    private const val title3Px = 17f // titleSmall
-    private const val title3PxLineHeight = 22f
-
-    private const val headlinePx = 16f //bodyMedium
-
-    private const val textPx = 15f //bodySmall
-    private const val textPxLineHeight = 20f
-
-    private const val subHeadPx = 14f //labelMedium
-    private const val subHeadPxLineHeight = 18f
-
-    private const val captionPx = 13f  //labelSmall
-    private const val captionPxLineHeight = 16f
+    val labelSmall = 13.sp
 
 
-    var labelSmall = 13.sp
-        private set
+    val labelSmallLineHeight = 16.sp
 
-    var labelSmallLineHeight = 16.sp
-        private set
 
-    var labelMedium = 14.sp
-        private set
-    var labelMediumLineHeight = 18.sp
-        private set
+    val labelMedium = 14.sp
 
-    var bodySmall = 15.sp
-        private set
-    var bodySmallLineHeight = 20.sp
-        private set
+    val labelMediumLineHeight = 18.sp
 
-    var bodyMedium = 16.sp
-        private set
 
-    var bodyMediumLineHeight = 20.sp
-        private set
+    val bodySmall = 15.sp
 
-    var titleSmall = 17.sp
-        private set
+    val bodySmallLineHeight = 20.sp
 
-    var titleSmallLineHeight = 22.sp
-        private set
 
-    var titleMedium = 20.sp
-        private set
-    var titleMediumLineHeight = 24.sp
-        private set
+    val bodyMedium = 16.sp
 
-    var titleLarge = 24.sp
-        private set
-    var titleLargeLineHeight = 28.sp
-        private set
+
+    val bodyMediumLineHeight = 20.sp
+
+
+    val titleSmall = 17.sp
+
+
+    val titleSmallLineHeight = 22.sp
+
+
+    val titleMedium = 20.sp
+
+    val titleMediumLineHeight = 24.sp
+
+
+    val titleLarge = 24.sp
+
+    val titleLargeLineHeight = 28.sp
 
 
     private val labelFont = Font(R.font.inter)
@@ -87,33 +61,4 @@ object KodeTraineeTypographyDefaults {
     private val displayFont = Font(R.font.inter)
     val displayFamily = displayFont.toFontFamily()
 
-    @Composable
-    fun adjustFontsSizeInPixelsToSp(density: Density) {
-        if (isAdjusted.not()) {
-            labelSmall = convertPixelsToSp(pixels = captionPx, density = density)
-            labelSmallLineHeight =
-                convertPixelsToSp(pixels = captionPxLineHeight, density = density)
-
-            labelMedium = convertPixelsToSp(pixels = subHeadPx, density = density)
-            labelMediumLineHeight =
-                convertPixelsToSp(pixels = subHeadPxLineHeight, density = density)
-
-            bodySmall = convertPixelsToSp(pixels = textPx, density = density)
-            bodySmallLineHeight = convertPixelsToSp(pixels = textPxLineHeight, density = density)
-
-            bodyMedium = convertPixelsToSp(pixels = headlinePx, density = density)
-            bodyMediumLineHeight = convertPixelsToSp(pixels = headlinePx, density = density)
-
-            titleSmall = convertPixelsToSp(pixels = title3Px, density = density)
-            titleSmallLineHeight = convertPixelsToSp(pixels = title3PxLineHeight, density = density)
-
-            titleMedium = convertPixelsToSp(pixels = title2Px, density = density)
-            titleMediumLineHeight =
-                convertPixelsToSp(pixels = title2PxLineHeight, density = density)
-
-            titleLarge = convertPixelsToSp(pixels = title1Px, density = density)
-            titleLargeLineHeight = convertPixelsToSp(pixels = title1PxLineHeight, density = density)
-            isAdjusted = true
-        }
-    }
 }

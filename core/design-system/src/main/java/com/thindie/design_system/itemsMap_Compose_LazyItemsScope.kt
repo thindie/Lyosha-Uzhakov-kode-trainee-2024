@@ -18,7 +18,7 @@ inline fun <T, R> LazyListScope.itemsMap(
 
         item(
             key = if (key != null) { index: Int -> index } else null,
-            contentType = { index: Int -> contentType(it.value) }
+            contentType = { _: Int -> contentType(it.value) }
         ) {
             itemsContent(it.value)
         }
