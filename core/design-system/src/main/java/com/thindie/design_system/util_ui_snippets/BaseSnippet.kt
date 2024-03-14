@@ -39,7 +39,7 @@ internal fun BaseUtilSnippet(
             )
             Text(
                 text = textLabel,
-                style = MaterialTheme.typography.bodyMedium, color = Color.Gray
+                style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onPrimaryContainer
             )
             if (isClickable) {
                 ClickableText(
