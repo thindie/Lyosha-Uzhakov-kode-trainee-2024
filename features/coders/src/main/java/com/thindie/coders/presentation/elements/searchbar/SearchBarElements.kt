@@ -42,6 +42,7 @@ import com.thindie.design_system.KodeTraineeStrings
 import com.thindie.design_system.painter
 import com.thindie.design_system.string
 import com.thindie.design_system.theme.KodeTraineeTheme
+import com.thindie.model.NotExpectedSideEffectInside
 
 
 @Composable
@@ -125,6 +126,10 @@ private fun BaseSearchBar(
         verticalAlignment = Alignment.Bottom,
         horizontalArrangement = Arrangement.Start
     ) {
+        @NotExpectedSideEffectInside("Выполнил свою имплементацию decoration box" +
+                " в text field  из за жесткой политики " +
+                "паддингов на стандартных элементах")
+
         KodeTraineeTextField(
             modifier = Modifier
                 .height(KodeTraineeDimenDefaults.SearchBar.height)
@@ -158,7 +163,6 @@ fun KodeTraineeTextField(
     interactionSource: MutableInteractionSource,
 ) {
 
-    //todo() see design searchbar impl
     val isFocused by interactionSource.collectIsFocusedAsState()
 
     BasicTextField(
