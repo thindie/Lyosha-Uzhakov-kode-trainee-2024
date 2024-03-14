@@ -8,23 +8,23 @@ object KodeTraineeDimenDefaults {
     private val cut = 4.dp
     private val extended = 12.dp
     private val full = 16.dp
-    private val base = 8.dp
+    private val baseDimen = 8.dp
 
     object PaddingValues {
-        val standart by lazy { PaddingValues(horizontal = extended, vertical = base) }
+        val standart by lazy { PaddingValues(horizontal = extended, vertical = baseDimen) }
     }
 
     object Spacing {
         val cutHorizontal by lazy { cut }
         val cutVertical by lazy { cut }
-        val baseVertical by lazy { base }
+        val baseVertical by lazy { baseDimen }
         val extendedVertical by lazy { extended }
         val baseHorizontal by lazy { extended }
         val extendedHorizontal by lazy { full }
     }
 
     object CoderList {
-        val height by lazy { base.times(10) }
+        val height by lazy { baseDimen.times(10) }
         val imageSize by lazy { extended.times(6) }
         val stickyHeader by lazy { cut.times(17) }
     }
@@ -36,15 +36,16 @@ object KodeTraineeDimenDefaults {
         const val adjustedSize = 0.7f
     }
 
-    object ProfileInfoBar {
-        val height by lazy { cut.times(15) }
+    object ProfileScreen {
+        val profileInfoTitleHeight by lazy { baseDimen.times(10) }
+        val profileInfoSnippetHeight by lazy { cut.times(15) }
     }
 
     object DrawableSize {
         val base by lazy { extended.times(2) }
-        val medium by lazy { base.times(7) }
+        val medium by lazy { baseDimen.times(7) }
         val large by lazy { extended.times(6) }
-        val extraLarge by lazy { base.times(13) }
+        val extraLarge by lazy { baseDimen.times(13) }
     }
 
     object BottomSheet {
