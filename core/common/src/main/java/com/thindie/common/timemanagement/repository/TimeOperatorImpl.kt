@@ -10,6 +10,7 @@ import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
+
 @Singleton
 internal class TimeOperatorImpl @Inject constructor(
     private val timeOperatorFormatter: TimeOperatorFormatter,
@@ -49,13 +50,20 @@ internal class TimeOperatorImpl @Inject constructor(
         return timeOperatorFormatter
     }
 
-    override fun getMillisFromStringDate(date: String, pattern: String): Long {
+    override fun getMillisFromCurrent(localDateTime: LocalDateTime): Long {
+        return try {
+            return localDateTime.toInstant(ZoneOffset.UTC).toEpochMilli()
+        } catch (e: Exception) {
+            0L
+        }
+    }
+
+    override fun getCurrentFromStringDate(date: String, pattern: String): LocalDateTime {
         return try {
             val dateFormatter = DateTimeFormatter.ofPattern(pattern)
-            val localDateTime = LocalDateTime.parse(date, dateFormatter)
-            localDateTime.toEpochSecond(ZoneOffset.from(getLocalDateTime(timeZone)))
+            return LocalDateTime.parse(date, dateFormatter)
         } catch (_: Exception) {
-            0L
+            getLocalDateTime(timeZone)
         }
     }
 

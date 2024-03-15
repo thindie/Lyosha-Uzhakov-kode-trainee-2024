@@ -1,8 +1,14 @@
 package com.thindie.coders.presentation.elements.codersList
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontWeight.Companion.W400
@@ -15,8 +21,61 @@ import com.thindie.design_system.elements.KodeTraineeGenericTextContentColumn
 import com.thindie.design_system.painter
 import com.thindie.model.coders.CoderModel
 
+
 @Composable
-internal fun CoderListUnit(modifier: Modifier = Modifier, coderModel: CoderModel) {
+internal fun CoderListUnitBirthDay(
+    modifier: Modifier = Modifier,
+    coderModel: CoderModel,
+    content: @Composable () -> Unit = {
+
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = coderModel.position,
+                color = MaterialTheme.colorScheme.tertiary,
+                style = MaterialTheme.typography.labelSmall,
+                fontWeight = W400
+            )
+            Box {
+                Text(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .align(Alignment.TopEnd),
+                    text = coderModel.birthday,
+                    color = MaterialTheme.colorScheme.tertiary,
+                    style = MaterialTheme.typography.bodySmall,
+                    fontWeight = W400
+                )
+            }
+        }
+    },
+) = CoderListUnit(modifier = modifier, coderModel = coderModel, content = content)
+
+@Composable
+internal fun CoderListUnitAlphabet(
+    modifier: Modifier = Modifier,
+    coderModel: CoderModel,
+    content: @Composable () -> Unit = {
+        Text(
+            text = coderModel.position,
+            color = MaterialTheme.colorScheme.tertiary,
+            style = MaterialTheme.typography.labelSmall,
+            fontWeight = W400
+        )
+    },
+) = CoderListUnit(modifier = modifier, coderModel = coderModel, content = content)
+
+
+@Composable
+private fun CoderListUnit(
+    modifier: Modifier = Modifier,
+    coderModel: CoderModel,
+    content: @Composable () -> Unit,
+) {
     val coderAvatar = CoderAsyncAvatarOrStub(coderModel = coderModel)
     KodeTraineeGenericImageComponentRow(
         modifier = modifier,
@@ -34,14 +93,7 @@ internal fun CoderListUnit(modifier: Modifier = Modifier, coderModel: CoderModel
                 fontWeight = W500,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             ),
-            content = {
-                Text(
-                    text = coderModel.position,
-                    color = MaterialTheme.colorScheme.tertiary,
-                    style = MaterialTheme.typography.labelSmall,
-                    fontWeight = W400
-                )
-            }
+            content = content
         )
     }
 }

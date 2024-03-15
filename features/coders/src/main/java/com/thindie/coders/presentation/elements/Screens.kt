@@ -26,28 +26,17 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.thindie.coders.internal_navigation.InternalFeatureRouting
 import com.thindie.coders.presentation.CodersScreenViewModel
-import com.thindie.coders.presentation.elements.codersList.CoderListUnit
+import com.thindie.coders.presentation.elements.codersList.CoderListUnitAlphabet
+import com.thindie.coders.presentation.elements.codersList.CoderListUnitBirthDay
 import com.thindie.coders.presentation.state.CodersScreenState
 import com.thindie.design_system.KodeTraineeDimenDefaults
+import com.thindie.design_system.KodeTraineeStrings
 import com.thindie.design_system.itemsMap
+import com.thindie.design_system.string
 import com.thindie.design_system.util_ui_snippets.UnsuccessfullSearchSnippet
 import com.thindie.model.NotExpectedSideEffectInside
 import com.thindie.model.coders.CoderModel
 
-internal fun NavGraphBuilder.defaultRoute(
-    viewModel: CodersScreenViewModel,
-    onClickCoder: (CoderModel) -> Unit,
-) {
-    composable(route = InternalFeatureRouting.defaultRoute) {
-
-        val uiState by viewModel.state.collectAsStateWithLifecycle(minActiveState = Lifecycle.State.RESUMED)
-
-        @NotExpectedSideEffectInside("Pull Refresh")
-        CoderScreenContentAdjuster(state = uiState) {
-            defaultCoderList(uiState, onClickCoder)
-        }
-    }
-}
 
 internal fun NavGraphBuilder.alphabetRoute(
     viewModel: CodersScreenViewModel,
@@ -84,7 +73,9 @@ private fun LazyListScope.defaultCoderList(
     onClickCoder: (CoderModel) -> Unit,
 ) {
     items(state.codersList, key = CoderModel::id) { coder ->
-        CoderListUnit(coderModel = coder, modifier = Modifier.clickable { onClickCoder(coder) })
+        CoderListUnitAlphabet(
+            coderModel = coder,
+            modifier = Modifier.clickable { onClickCoder(coder) })
     }
 }
 
@@ -98,7 +89,9 @@ private fun LazyListScope.groupedCoderList(
             StickyHeader(header = header)
         }) { codersList ->
         codersList.forEach { coder ->
-            CoderListUnit(coderModel = coder, modifier = Modifier.clickable { onClickCoder(coder) })
+            CoderListUnitBirthDay(
+                coderModel = coder,
+                modifier = Modifier.clickable { onClickCoder(coder) })
             Spacer(modifier = Modifier.height(KodeTraineeDimenDefaults.Spacing.baseVertical))
         }
     }
@@ -126,6 +119,7 @@ private fun CoderScreenContentAdjuster(
 
 @Composable
 private fun StickyHeader(modifier: Modifier = Modifier, header: String) {
+
     val dividerModifier = Modifier.width(KodeTraineeDimenDefaults.CoderList.imageSize)
     val dividerColor = MaterialTheme.colorScheme.onPrimaryContainer
     Row(
@@ -140,10 +134,15 @@ private fun StickyHeader(modifier: Modifier = Modifier, header: String) {
             modifier = dividerModifier.padding(start = KodeTraineeDimenDefaults.Spacing.baseHorizontal),
             color = dividerColor
         )
-        Text(text = header, color = dividerColor, style = MaterialTheme.typography.labelSmall)
+        Text(
+            text = header.ifBlank { KodeTraineeStrings.CoderList.birthdayStub.string() },
+            color = dividerColor,
+            style = MaterialTheme.typography.labelSmall
+        )
         Divider(
             modifier = dividerModifier.padding(end = KodeTraineeDimenDefaults.Spacing.baseHorizontal),
             color = dividerColor
         )
     }
+
 }

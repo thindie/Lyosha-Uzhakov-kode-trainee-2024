@@ -14,5 +14,7 @@ interface TimeOperator {
 
     fun getTimeFormatter(): TimeOperatorFormatter
 
-    fun getMillisFromStringDate(date: String, pattern: String): Long
+    fun getMillisFromCurrent(localDateTime: LocalDateTime): Long
+
+    fun getCurrentFromStringDate(date: String, pattern: String): LocalDateTime
 }

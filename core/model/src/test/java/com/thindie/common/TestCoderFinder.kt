@@ -19,8 +19,7 @@ class TestCoderFinder {
                 lastName = "-1",
                 position = "",
                 userTag = "",
-                birthdayMillis = 132L,
-                birthday = ""
+                birthday = "", dayOfYear = 0
             ).findCoderByNameAndTag("")
         )
 
@@ -34,9 +33,8 @@ class TestCoderFinder {
                 id = "",
                 lastName = "Beer",
                 position = "",
-                userTag = "VB",
-                birthdayMillis = 132L,
-                birthday = ""
+                userTag = "",
+                birthday = "", dayOfYear = 0
             ).findCoderByNameAndTag("vi")
         )
 
@@ -50,9 +48,8 @@ class TestCoderFinder {
                 id = "",
                 lastName = "Beer",
                 position = "",
-                userTag = "VB",
-                birthdayMillis = 132L,
-                birthday = ""
+                userTag = "",
+                birthday = "", dayOfYear = 0
             ).findCoderByNameAndTag("vivi")
         )
 
@@ -66,9 +63,8 @@ class TestCoderFinder {
                 id = "",
                 lastName = "Beer",
                 position = "",
-                userTag = "VB",
-                birthdayMillis = 132L,
-                birthday = ""
+                userTag = "",
+                birthday = "", dayOfYear = 0
             ).findCoderByNameAndTag(" vb")
         )
     }

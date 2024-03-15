@@ -11,5 +11,3 @@ fun NavController.forward(route: String) {
 
 fun NavController.alphabetRoute() = forward(InternalFeatureRouting.alphabetRoute)
 fun NavController.birthdayRoute() = forward(InternalFeatureRouting.birthdayRoute)
-
-fun NavController.defaultRoute() = forward(InternalFeatureRouting.defaultRoute)
