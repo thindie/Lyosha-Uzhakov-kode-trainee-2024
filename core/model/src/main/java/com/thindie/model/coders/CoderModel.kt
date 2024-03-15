@@ -8,6 +8,8 @@ data class CoderModel(
     val yearOfNearestCelebrate: Int,
     val department: Department,
     val firstName: String,
+    val dayOfYear: Int,
+    val birthday: String,
     val id: String,
     val lastName: String,
     val position: String,
@@ -18,7 +20,7 @@ data class CoderModel(
         .plus(lastName)
 
     fun getNearestCelebrationYearOrBlank(): String {
-        return if (isAwaitsBirthdayAtCurrentYear) CURRENT_YEAR else yearOfNearestCelebrate.toString()
+        return if (isAwaitsBirthdayAtCurrentYear) yearOfNearestCelebrate.toString() else CURRENT_YEAR
     }
     companion object {
         private const val CURRENT_YEAR = ""

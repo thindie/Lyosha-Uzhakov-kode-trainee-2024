@@ -1,6 +1,7 @@
 package com.thindie.coders.presentation.state
 
 import com.thindie.common.coreartifacts.ViewState
+import com.thindie.model.Department
 import com.thindie.model.coders.CoderModel
 
 internal data class CodersScreenState(
@@ -29,7 +30,10 @@ internal data class CodersScreenState(
         fun getDefault() = CodersScreenState(
             isLoading = false,
             isError = false,
-            tabRowState = ScrollableTabRowState(selectedIndex = 0),
+            tabRowState = ScrollableTabRowState(
+                selectedIndex = 0,
+                department = Department.UNSPECIFIED
+            ),
             codersList = emptyList(),
             searchBarState = SearchBarState(
                 shouldShowDefaultState = true,
@@ -37,7 +41,7 @@ internal data class CodersScreenState(
                 isSortOrGroupSet = false
             ), bottomSheetState = BottomSheetState(
                 isExpanded = false,
-                sortType = BottomSheetState.Companion.SortType.DEFAULT
+                sortType = BottomSheetState.Companion.SortType.ALPHABET
             )
         )
     }

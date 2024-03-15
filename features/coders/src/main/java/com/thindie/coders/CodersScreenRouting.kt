@@ -24,7 +24,6 @@ import com.thindie.coders.presentation.CodersScreenViewModel
 import com.thindie.coders.presentation.elements.alphabetRoute
 import com.thindie.coders.presentation.elements.birthdayRoute
 import com.thindie.coders.presentation.elements.bottomsheet.KodeTraineeBottomSheet
-import com.thindie.coders.presentation.elements.defaultRoute
 import com.thindie.coders.presentation.elements.searchbar.KodeTraineeSearchBar
 import com.thindie.coders.presentation.elements.tabrow.KodeTraineeScrollableTabRow
 import com.thindie.coders.presentation.events.CodersScreenViewModelEvent
@@ -67,12 +66,8 @@ fun NavGraphBuilder.codersRoute(onClickCoder: (CoderModel) -> Unit) {
                 NavHost(
                     modifier = Modifier.padding(paddingValues),
                     navController = navController,
-                    startDestination = InternalFeatureRouting.defaultRoute
+                    startDestination = InternalFeatureRouting.alphabetRoute
                 ) {
-                    defaultRoute(
-                        viewModel = viewModel,
-                        onClickCoder = onClickCoder
-                    )
                     birthdayRoute(
                         viewModel = viewModel,
                         onClickCoder = onClickCoder

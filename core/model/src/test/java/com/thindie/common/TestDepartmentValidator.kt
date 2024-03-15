@@ -2,6 +2,8 @@ package com.thindie.common
 
 import com.thindie.model.CoderDepartmentValidator
 import com.thindie.model.Department
+import com.thindie.model.coders.CoderModel
+import com.thindie.model.coders.findCoderByNameAndTag
 import org.junit.Test
 import kotlin.jvm.Throws
 
@@ -19,4 +21,6 @@ class TestDepartmentValidator() {
     fun faildedRequirement(){
         assert(CoderDepartmentValidator.getOrThrow("") == Department.IOS)
     }
+
+
 }

@@ -45,4 +45,8 @@ object KodeTraineeStrings {
         val ageEnded5_0 = R.string.profile_year_suffix_ru_locale_opt0
         val stub = R.string.profile_year_suffix__ru_locale_stub
     }
+
+    object CoderList {
+        val birthdayStub = R.string.coder_list_birthday_stub
+    }
 }

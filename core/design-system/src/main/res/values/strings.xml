@@ -41,4 +41,6 @@
     <string name="department_support">"Техподдержка"</string>
     <string name="department_analytics">"Аналитика"</string>
 
+    <string name="coder_list_birthday_stub">"Уже отпраздновали"</string>
+
 </resources>
