@@ -3,6 +3,7 @@ package com.thindie.coders.presentation.elements
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +14,10 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,6 +33,7 @@ import com.thindie.coders.internal_navigation.InternalFeatureRouting
 import com.thindie.coders.presentation.CodersScreenViewModel
 import com.thindie.coders.presentation.elements.codersList.CoderListUnitAlphabet
 import com.thindie.coders.presentation.elements.codersList.CoderListUnitBirthDay
+import com.thindie.coders.presentation.events.CodersScreenViewModelEvent
 import com.thindie.coders.presentation.state.CodersScreenState
 import com.thindie.design_system.KodeTraineeDimenDefaults
 import com.thindie.design_system.KodeTraineeStrings
@@ -47,7 +53,7 @@ internal fun NavGraphBuilder.alphabetRoute(
         val uiState by viewModel.state.collectAsStateWithLifecycle(minActiveState = Lifecycle.State.RESUMED)
 
         @NotExpectedSideEffectInside("Pull Refresh")
-        CoderScreenContentAdjuster(state = uiState) {
+        CoderScreenContentAdjuster(state = uiState, onRefresh = viewModel::onEvent) {
             defaultCoderList(uiState, onClickCoder)
         }
     }
@@ -62,7 +68,7 @@ internal fun NavGraphBuilder.birthdayRoute(
         val uiState by viewModel.state.collectAsStateWithLifecycle(minActiveState = Lifecycle.State.RESUMED)
 
         @NotExpectedSideEffectInside("Pull Refresh")
-        CoderScreenContentAdjuster(state = uiState) {
+        CoderScreenContentAdjuster(state = uiState, onRefresh = viewModel::onEvent) {
             groupedCoderList(uiState, onClickCoder)
         }
     }
@@ -98,24 +104,44 @@ private fun LazyListScope.groupedCoderList(
 }
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun CoderScreenContentAdjuster(
     modifier: Modifier = Modifier,
     state: CodersScreenState,
+    onRefresh: (CodersScreenViewModelEvent) -> Unit,
     codersContent: LazyListScope.() -> Unit,
 ) {
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = state.isRefreshing,
+        onRefresh = { onRefresh(CodersScreenViewModelEvent.OnRefreshRequest) }
+    )
     if (state.isError) UnsuccessfullSearchSnippet()
     else LazyColumn(
         modifier = modifier
             .fillMaxWidth()
+            .pullRefresh(pullRefreshState)
             .wrapContentHeight()
             .padding(all = KodeTraineeDimenDefaults.Spacing.extendedHorizontal),
         verticalArrangement = Arrangement.spacedBy(KodeTraineeDimenDefaults.Spacing.baseVertical)
     ) {
         codersContent()
     }
+    Box(modifier = Modifier.fillMaxWidth()) {
+        PullRefreshIndicator(
+            refreshing = state.isRefreshing,
+            state = pullRefreshState,
+            modifier = Modifier.align(Alignment.TopCenter),
+            backgroundColor = MaterialTheme.colorScheme.background,
+            contentColor = if (state.isRefreshing)
+                MaterialTheme.colorScheme.primary
+            else MaterialTheme.colorScheme.onBackground
+        )
+    }
+
 
 }
+
 
 @Composable
 private fun StickyHeader(modifier: Modifier = Modifier, header: String) {

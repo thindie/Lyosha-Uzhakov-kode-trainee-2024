@@ -7,6 +7,7 @@ object Dependencies {
         const val ui = "androidx.compose.ui:ui"
         const val uiGraphics = "androidx.compose.ui:ui-graphics"
         const val material3 = "androidx.compose.material3:material3"
+        const val material = "androidx.compose.material:material:1.3.0"
         const val navigation = "androidx.navigation:navigation-compose:2.7.6"
         const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:1.0.0"
         const val toolingPreview = "androidx.compose.ui:ui-tooling-preview"

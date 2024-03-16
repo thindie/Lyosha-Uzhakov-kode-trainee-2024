@@ -7,6 +7,7 @@ import com.thindie.model.coders.CoderModel
 internal data class CodersScreenState(
     override val isLoading: Boolean,
     override val isError: Boolean,
+    val isRefreshing: Boolean,
     val codersList: List<CoderModel>,
     val tabRowState: ScrollableTabRowState,
     val searchBarState: SearchBarState,
@@ -42,7 +43,7 @@ internal data class CodersScreenState(
             ), bottomSheetState = BottomSheetState(
                 isExpanded = false,
                 sortType = BottomSheetState.Companion.SortType.ALPHABET
-            )
+            ), isRefreshing = false
         )
     }
 }
