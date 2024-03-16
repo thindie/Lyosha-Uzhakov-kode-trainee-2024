@@ -3,6 +3,7 @@ package com.thindie.coder_profile.presentation.screen
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -36,10 +37,12 @@ import coil.compose.rememberAsyncImagePainter
 import com.thindie.coder_profile.presentation.state.CoderProfileScreenState
 import com.thindie.design_system.KodeTraineeDimenDefaults
 import com.thindie.design_system.KodeTraineeDrawable
+import com.thindie.design_system.KodeTraineeStrings
 import com.thindie.design_system.elements.KodeTraineeGenericIconComponentRow
 import com.thindie.design_system.elements.KodeTraineeGenericImageComponentColumn
 import com.thindie.design_system.elements.KodeTraineeGenericTextContentColumn
 import com.thindie.design_system.painter
+import com.thindie.design_system.string
 import com.thindie.design_system.theme.KodeTraineeTheme
 import com.thindie.model.NotExpectedSideEffectInside
 import com.thindie.model.RussianAgePostfix
@@ -166,7 +169,8 @@ private fun BirthdayInfoSnippet(modifier: Modifier = Modifier, profileModel: Cod
                 fontWeight = W500
             )
             Text(
-                text = profileModel.age.toString(),
+                text = profileModel.age.toString()
+                    .plus(adaptRussianAgeMorphology(profileModel.russianAgePostfix).string()),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                 fontWeight = W500
@@ -174,6 +178,15 @@ private fun BirthdayInfoSnippet(modifier: Modifier = Modifier, profileModel: Cod
         }
 
     }
+}
+@StringRes
+private fun adaptRussianAgeMorphology(russianAgePostfix: RussianAgePostfix): Int {
+        return when (russianAgePostfix){
+            RussianAgePostfix.FiveToTen ->  KodeTraineeStrings.CoderProfile.ageEnded5_0
+            RussianAgePostfix.One ->  KodeTraineeStrings.CoderProfile.ageEnded1
+            RussianAgePostfix.Stub ->  KodeTraineeStrings.CoderProfile.stub
+            RussianAgePostfix.TwoToFour ->  KodeTraineeStrings.CoderProfile.ageEnded2_4
+        }
 }
 
 private fun dialIntentInvoke(context: Context, profileModel: CoderProfileModel) {

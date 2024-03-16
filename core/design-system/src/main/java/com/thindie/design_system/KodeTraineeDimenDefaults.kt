@@ -33,7 +33,7 @@ object KodeTraineeDimenDefaults {
     object SearchBar {
         val height by lazy { cut.times(10) }
         const val defaultSize = 1f
-        const val adjustedSize = 0.7f
+        const val adjustedSize = 0.6f
     }
 
     object ProfileScreen {
@@ -43,7 +43,6 @@ object KodeTraineeDimenDefaults {
 
     object DrawableSize {
         val base by lazy { extended.times(2) }
-        val medium by lazy { baseDimen.times(7) }
         val large by lazy { extended.times(6) }
         val extraLarge by lazy { baseDimen.times(13) }
     }

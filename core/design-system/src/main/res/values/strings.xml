@@ -22,9 +22,9 @@
     Проверь соединение с интернетом. "</string>
     <string name="snack_bar_relaunch">"Секундочку, гружусь…"</string>
 
-    <string name="profile_year_suffix_ru_locale_opt0">"лет"</string>
-    <string name="profile_year_suffix_ru_locale_opt1">"год"</string>
-    <string name="profile_year_suffix__ru_locale_opt2">"года"</string>
+    <string name="profile_year_suffix_ru_locale_opt0">" лет"</string>
+    <string name="profile_year_suffix_ru_locale_opt1">" год"</string>
+    <string name="profile_year_suffix__ru_locale_opt2">" года"</string>
     <string name="profile_year_suffix__ru_locale_stub">""</string>
 
     <string name="departmens">"Все"</string>
@@ -41,6 +41,6 @@
     <string name="department_support">"Техподдержка"</string>
     <string name="department_analytics">"Аналитика"</string>
 
-    <string name="coder_list_birthday_stub">"Уже отпраздновали"</string>
+    <string name="coder_list_birthday_stub">"Празднуют в следующем году"</string>
 
 </resources>

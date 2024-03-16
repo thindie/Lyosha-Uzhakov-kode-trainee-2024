@@ -58,7 +58,7 @@ internal class CodersScreenViewModel @Inject constructor(
                     .sortedBy(CoderModel::dayOfYear)
             }
 
-         CodersScreenState(
+        CodersScreenState(
             isLoading = fetchingProcess.isLoading,
             isError = filteredAndSortedCodersList.isEmpty(),
             codersList = filteredAndSortedCodersList,
@@ -70,6 +70,7 @@ internal class CodersScreenViewModel @Inject constructor(
                 isSortOrGroupSet = searchBar.isSortOrGroupSet,
                 fieldValue = searchBar.fieldValue
             ),
+            isRefreshing = fetchingProcess.isRefresh,
             bottomSheetState = BottomSheetState(
                 isExpanded = bottomSheet.isExpanded, sortType = bottomSheet.sortType
             )
@@ -90,6 +91,10 @@ internal class CodersScreenViewModel @Inject constructor(
         _fetchState.update { fetchState -> fetchState.copy(isLoading = false, isError = false) }
     }
 
+    private fun onRefresh() {
+        _fetchState.update { fetchState -> fetchState.copy(isRefresh = true) }
+        _fetchState.update { fetchState -> fetchState.copy(isRefresh = false) }
+    }
 
     fun getCoders() {
         @NotExpectedSideEffectInside("Encapsulated current VM state management") requestResultAndParse(
@@ -114,7 +119,8 @@ internal class CodersScreenViewModel @Inject constructor(
                     )
                 )
             }
-             CodersScreenViewModelEvent.OnClickAlphabetSort -> {
+
+            CodersScreenViewModelEvent.OnClickAlphabetSort -> {
                 _searchBarState.update { searchBarState ->
                     searchBarState.copy(
                         isSortOrGroupSet = false
@@ -125,7 +131,8 @@ internal class CodersScreenViewModel @Inject constructor(
                 }
                 onEvent(CodersScreenViewModelEvent.OnBottomSheetDismiss)
             }
-             CodersScreenViewModelEvent.OnClickBirthdaySort -> {
+
+            CodersScreenViewModelEvent.OnClickBirthdaySort -> {
                 _searchBarState.update { searchBarState ->
                     searchBarState.copy(
                         isSortOrGroupSet = true
@@ -136,21 +143,24 @@ internal class CodersScreenViewModel @Inject constructor(
                 }
                 onEvent(CodersScreenViewModelEvent.OnBottomSheetDismiss)
             }
-             is CodersScreenViewModelEvent.OnClickTabRow -> {
+
+            is CodersScreenViewModelEvent.OnClickTabRow -> {
                 _tabRowState.update { tabRowState ->
                     tabRowState.copy(
                         selectedIndex = event.index, department = event.department
                     )
                 }
             }
-             CodersScreenViewModelEvent.OnClickSearchBarButtonCancel -> {
+
+            CodersScreenViewModelEvent.OnClickSearchBarButtonCancel -> {
                 onEvent(
                     CodersScreenViewModelEvent.OnClickClearSearchBarInput(
                         shouldResetSearchBarState = true
                     )
                 )
             }
-             is CodersScreenViewModelEvent.OnSearchBarValueChange -> {
+
+            is CodersScreenViewModelEvent.OnSearchBarValueChange -> {
                 _searchBarState.update { searchBarState ->
                     searchBarState.copy(
                         fieldValue = event.fieldValue,
@@ -158,21 +168,25 @@ internal class CodersScreenViewModel @Inject constructor(
                     )
                 }
             }
-             CodersScreenViewModelEvent.OnBottomSheetDismiss -> {
+
+            CodersScreenViewModelEvent.OnBottomSheetDismiss -> {
                 _bottomSheetState.update { bottomSheetState ->
                     bottomSheetState.copy(
                         isExpanded = false
                     )
                 }
             }
-             CodersScreenViewModelEvent.OnBottomSheetInvoke -> {
+
+            CodersScreenViewModelEvent.OnBottomSheetInvoke -> {
                 _bottomSheetState.update { bottomSheetState ->
                     bottomSheetState.copy(
                         isExpanded = true
                     )
                 }
             }
-             CodersScreenViewModelEvent.OnRefreshRequest -> {
+
+            CodersScreenViewModelEvent.OnRefreshRequest -> {
+                onRefresh()
                 _coderListSupplierState.value.codersList.ifEmpty {
                     getCoders()
                 }

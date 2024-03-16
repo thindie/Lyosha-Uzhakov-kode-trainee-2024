@@ -58,6 +58,7 @@ dependencies {
     implementation(Dependencies.Compose.material3)
     implementation(Dependencies.Compose.navigation)
     implementation(Dependencies.Compose.hiltNavigation)
+    implementation(Dependencies.Compose.material)
 
     // Dagger
     implementation(Dependencies.Dagger.dagger)
