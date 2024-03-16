@@ -39,6 +39,11 @@ object KodeTraineeStrings {
         val all = R.string.departmens
     }
 
+    object SnackBar {
+        val networkError = R.string.snack_bar_trouble
+        val relaunch = R.string.snack_bar_relaunch
+    }
+
     object CoderProfile {
         val ageEnded1 = R.string.profile_year_suffix_ru_locale_opt1
         val ageEnded2_4 = R.string.profile_year_suffix__ru_locale_opt2

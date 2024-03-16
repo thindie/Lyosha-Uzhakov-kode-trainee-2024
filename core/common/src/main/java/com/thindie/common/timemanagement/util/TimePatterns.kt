@@ -7,7 +7,7 @@ import javax.inject.Singleton
 internal class TimePatterns @Inject constructor() {
 
     fun dayMonthYear(): String {
-        return "dd MMMM yyyy"
+        return "d MMMM yyyy"
     }
 
     fun year(): String {

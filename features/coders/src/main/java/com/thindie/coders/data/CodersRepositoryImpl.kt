@@ -4,24 +4,24 @@ import com.thindie.coders.di.CodersMainScope
 import com.thindie.coders.domain.CodersRepository
 import com.thindie.common.KodeTraineeCommon
 import com.thindie.common.timemanagement.TimeOperator
+import com.thindie.database.LocalSourceAdapter
 import com.thindie.design_system.formatting.KodeTraineeTimePatterns
 import com.thindie.model.CoderDepartmentValidator
 import com.thindie.model.coders.CoderModel
-import com.thindie.network.RemoteSourceAdapter
 import javax.inject.Inject
 
 @CodersMainScope
 internal class CodersRepositoryImpl @Inject constructor(
-    private val remoteSourceAdapter: RemoteSourceAdapter,
+    private val remoteSourceAdapter: LocalSourceAdapter,
     private val timeOperator: TimeOperator,
 ) :
     CodersRepository {
     override suspend fun getCodersList(): Result<List<CoderModel>> {
         return remoteSourceAdapter
-            .getCodersDtoList { dto ->
+            .getCodersModelList { model ->
 
                 val coderBirthDayLocalDateTime = timeOperator.getCurrentFromStringDate(
-                    date = dto.getDtoBirthday()
+                    date = model.getModelBirthday()
                         .plus(KodeTraineeCommon.RemoteSource.timePatternAdjustment),
                     pattern = KodeTraineeCommon.RemoteSource.timePattern
                 )
@@ -34,19 +34,15 @@ internal class CodersRepositoryImpl @Inject constructor(
                 val isAwaiting = current.dayOfYear < coderBirthDayLocalDateTime.dayOfYear
 
                 CoderModel(
-                    avatarUrl = dto.getDtoAvatarLink(),
-
-                    //todo(
+                    avatarUrl = model.getModelAvatarLink(),
                     isAwaitsBirthdayAtCurrentYear = isAwaiting,
-                    //todo(
                     yearOfNearestCelebrate = if (isAwaiting) current.year else 0,
-
-                    department = CoderDepartmentValidator.getOrThrow(dto.getDtoDepartment()),
-                    firstName = dto.getDtoFirstName(),
-                    id = dto.getDtoId(),
-                    lastName = dto.getDtoLastName(),
-                    position = dto.getDtoPosition(),
-                    userTag = dto.getDtoUserTag(),
+                    department = CoderDepartmentValidator.getOrThrow(model.getModelDepartment()),
+                    firstName = model.getModelFirstName(),
+                    id = model.getModelId(),
+                    lastName = model.getModelLastName(),
+                    position = model.getModelPosition(),
+                    userTag = model.getModelUserTag(),
                     dayOfYear = coderBirthDayLocalDateTime.dayOfYear,
                     birthday = timeOperator.getCurrent(
                         birthdayInEpochMillis,

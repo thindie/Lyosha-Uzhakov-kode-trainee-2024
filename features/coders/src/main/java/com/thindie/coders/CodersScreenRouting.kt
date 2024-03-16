@@ -24,6 +24,7 @@ import com.thindie.coders.presentation.CodersScreenViewModel
 import com.thindie.coders.presentation.elements.alphabetRoute
 import com.thindie.coders.presentation.elements.birthdayRoute
 import com.thindie.coders.presentation.elements.bottomsheet.KodeTraineeBottomSheet
+import com.thindie.coders.presentation.elements.loadingRoute
 import com.thindie.coders.presentation.elements.searchbar.KodeTraineeSearchBar
 import com.thindie.coders.presentation.elements.tabrow.KodeTraineeScrollableTabRow
 import com.thindie.coders.presentation.events.CodersScreenViewModelEvent
@@ -35,7 +36,7 @@ import com.thindie.model.NotExpectedSideEffectInside
 import com.thindie.model.coders.CoderModel
 
 @OptIn(ExperimentalMaterial3Api::class)
-fun NavGraphBuilder.codersRoute(onClickCoder: (CoderModel) -> Unit) {
+fun NavGraphBuilder.codersRoute(onClickCoder: (CoderModel) -> Unit, onCriticalError: () -> Unit) {
     composable(route = KodeTraineeCommon.FeatureDestinations.codersSummary) {
         val daggerComponent = initFeatureDaggerComponent()
         if (daggerComponent != null) {
@@ -43,55 +44,67 @@ fun NavGraphBuilder.codersRoute(onClickCoder: (CoderModel) -> Unit) {
             val viewModel: CodersScreenViewModel =
                 viewModel(factory = daggerComponent.provideFactory())
 
-            viewModel.getCoders()
+            viewModel.onEvent(CodersScreenViewModelEvent.OnRefreshRequest)
 
             val navController = rememberNavController()
             val uiState by viewModel.state.collectAsStateWithLifecycle(minActiveState = Lifecycle.State.RESUMED)
             val modalBottomSheetState = rememberModalBottomSheetState()
 
-            Scaffold(topBar = {
-                Column {
-                    KodeTraineeSearchBar(
-                        modifier = Modifier.padding(KodeTraineeDimenDefaults.PaddingValues.standart),
-                        searchBarState = uiState.searchBarState,
-                        onEvent = viewModel::onEvent
-                    )
 
-                    KodeTraineeScrollableTabRow(
-                        selectedIndex = uiState.tabRowState.selectedIndex,
-                        onClickTab = viewModel::onEvent
-                    )
-                }
-            }) { paddingValues ->
-                NavHost(
-                    modifier = Modifier.padding(paddingValues),
-                    navController = navController,
-                    startDestination = InternalFeatureRouting.alphabetRoute
-                ) {
-                    birthdayRoute(
-                        viewModel = viewModel,
-                        onClickCoder = onClickCoder
-                    )
-                    alphabetRoute(
-                        viewModel = viewModel,
-                        onClickCoder = onClickCoder
-                    )
-                }
-            }
-            if (uiState.bottomSheetState.isExpanded) {
-                KodeTraineeBottomSheet(
-                    state = uiState.bottomSheetState,
-                    modalSheetState = modalBottomSheetState,
-                    onEvent = {
-                        @NotExpectedSideEffectInside("It can navigate through feature")
-                        viewModel.onEvent(
-                            onBottomSheetEvent(it, navController)
+            if (uiState.isCriticalError.not()) {
+
+                Scaffold(topBar = {
+                    Column {
+                        KodeTraineeSearchBar(
+                            modifier = Modifier.padding(KodeTraineeDimenDefaults.PaddingValues.standart),
+                            searchBarState = uiState.searchBarState,
+                            onEvent = viewModel::onEvent
+                        )
+
+                        KodeTraineeScrollableTabRow(
+                            selectedIndex = uiState.tabRowState.selectedIndex,
+                            onClickTab = viewModel::onEvent
                         )
                     }
-                )
-            }
-
-
+                }) { paddingValues ->
+                     NavHost(
+                        modifier = Modifier.padding(paddingValues),
+                        navController = navController,
+                        startDestination = InternalFeatureRouting.loadingRoute
+                    ) {
+                        birthdayRoute(
+                            viewModel = viewModel,
+                            onClickCoder = onClickCoder
+                        )
+                        alphabetRoute(
+                            viewModel = viewModel,
+                            onClickCoder = onClickCoder
+                        )
+                        loadingRoute(
+                            onShimmerComplete = {
+                                if (uiState.isCriticalError.not()) {
+                                    navController.alphabetRoute()
+                                }
+                            }
+                        )
+                    }
+                }
+                if (uiState.bottomSheetState.isExpanded) {
+                    KodeTraineeBottomSheet(
+                        state = uiState.bottomSheetState,
+                        modalSheetState = modalBottomSheetState,
+                        onEvent = {
+                            @NotExpectedSideEffectInside("It can navigate through feature")
+                            viewModel.onEvent(
+                                onBottomSheetEvent(it, navController)
+                            )
+                        }
+                    )
+                }
+            } else ErrorScreen(onClick = {
+                onCriticalError()
+                viewModel.onEvent(CodersScreenViewModelEvent.OnRefreshRequest)
+            })
         } else ErrorScreen()
     }
 }

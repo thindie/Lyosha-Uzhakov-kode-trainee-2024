@@ -21,10 +21,12 @@ import com.thindie.model.coders.CoderModel
 import com.thindie.model.coders.findCoderByNameAndTag
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 @CodersMainScope
 internal class CodersScreenViewModel @Inject constructor(
@@ -58,6 +60,8 @@ internal class CodersScreenViewModel @Inject constructor(
                     .sortedBy(CoderModel::dayOfYear)
             }
 
+
+
         CodersScreenState(
             isLoading = fetchingProcess.isLoading,
             isError = filteredAndSortedCodersList.isEmpty(),
@@ -71,17 +75,30 @@ internal class CodersScreenViewModel @Inject constructor(
                 fieldValue = searchBar.fieldValue
             ),
             isRefreshing = fetchingProcess.isRefresh,
+            isCriticalError = fetchingProcess.isError,
             bottomSheetState = BottomSheetState(
-                isExpanded = bottomSheet.isExpanded, sortType = bottomSheet.sortType
+                isExpanded = bottomSheet.isExpanded, sortType = bottomSheet.sortType,
+            ),
+
             )
-        )
 
     }
 
     override val state: StateFlow<CodersScreenState> =
         _state.subscribeControlledStateFlow(viewModelScope, CodersScreenState.getDefault())
 
-    override fun onError() {}
+    override fun onError() {
+        viewModelScope.launch {
+            delay(FetchState.fetchStateDelay)
+            _fetchState.update { fetchState ->
+                fetchState.copy(
+                    isError = _coderListSupplierState.value.codersList.isEmpty(),
+                    isLoading = false
+                )
+            }
+        }
+    }
+
 
     override fun onLoading() {
         _fetchState.update { fetchState -> fetchState.copy(isLoading = true) }
@@ -96,16 +113,21 @@ internal class CodersScreenViewModel @Inject constructor(
         _fetchState.update { fetchState -> fetchState.copy(isRefresh = false) }
     }
 
-    fun getCoders() {
+    private fun getCoders() {
         @NotExpectedSideEffectInside("Encapsulated current VM state management") requestResultAndParse(
             request = getCodersUseCase::get,
             dispatcher = ioDispatcher,
-            onSuccess = {
-                onSuccess()
-                _coderListSupplierState.update { stateToUpdate ->
-                    stateToUpdate.copy(
-                        codersList = it
-                    )
+            onSuccess = { givenList ->
+
+                if (givenList.isEmpty()) {
+                    onError()
+                } else {
+                    onSuccess()
+                    _coderListSupplierState.update { stateToUpdate ->
+                        stateToUpdate.copy(
+                            codersList = givenList
+                        )
+                    }
                 }
             })
     }
@@ -187,10 +209,9 @@ internal class CodersScreenViewModel @Inject constructor(
 
             CodersScreenViewModelEvent.OnRefreshRequest -> {
                 onRefresh()
-                _coderListSupplierState.value.codersList.ifEmpty {
-                    getCoders()
-                }
+                getCoders()
             }
+
         }
     }
 }

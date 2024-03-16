@@ -6,4 +6,5 @@ object Modules {
     val app = ":app"
     val featureProfile = ":features:coder-profile"
     val model = ":core:model"
+    val dataBase = ":core:database"
 }
