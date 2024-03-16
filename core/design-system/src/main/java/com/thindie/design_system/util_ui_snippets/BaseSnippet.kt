@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import com.thindie.design_system.KodeTraineeDimenDefaults
@@ -30,6 +31,7 @@ internal fun BaseUtilSnippet(
         KodeTraineeGenericImageComponentColumn(
             modifier = modifier.align(Alignment.Center),
             painter = painter,
+            contentScale = ContentScale.Inside,
             verticalArrangement = Arrangement.spacedBy(KodeTraineeDimenDefaults.Spacing.extendedVertical)
         ) {
             Text(
