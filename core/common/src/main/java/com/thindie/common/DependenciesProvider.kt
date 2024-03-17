@@ -1,6 +1,6 @@
 package com.thindie.common
 
 import com.thindie.common.di.CommonProvider
-import com.thindie.network.ServiceProvider
+import com.thindie.database.LocalSourceProvider
 
-interface DependenciesProvider :  CommonProvider, ServiceProvider
+interface DependenciesProvider : CommonProvider, LocalSourceProvider

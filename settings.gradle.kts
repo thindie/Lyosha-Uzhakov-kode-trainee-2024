@@ -22,4 +22,4 @@ include(":features:coders")
 include(":features:coder-profile")
 include(":core:model")
 
- 
+include(":core:database")

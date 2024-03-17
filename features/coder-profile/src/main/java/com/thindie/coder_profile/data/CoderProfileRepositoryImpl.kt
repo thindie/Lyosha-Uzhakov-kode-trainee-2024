@@ -4,36 +4,34 @@ import com.thindie.coder_profile.di.CoderProfileScope
 import com.thindie.coder_profile.domain.CoderProfileRepository
 import com.thindie.common.KodeTraineeCommon
 import com.thindie.common.timemanagement.TimeOperator
+import com.thindie.database.LocalSourceAdapter
 import com.thindie.model.RussianAgePostfix
 import com.thindie.model.coder_profile.CoderProfileModel
-import com.thindie.network.RemoteSourceAdapter
 import java.time.LocalDateTime
 import javax.inject.Inject
 
 @CoderProfileScope
 internal class CoderProfileRepositoryImpl @Inject constructor(
-    private val adapter: RemoteSourceAdapter,
+    private val adapter: LocalSourceAdapter,
     private val timeOperator: TimeOperator,
 ) :
     CoderProfileRepository {
     override suspend fun getCoderProfile(id: String): Result<CoderProfileModel> {
-        return adapter.getCodersDtoList {
-            val age = getAge(it.getDtoBirthday(), timeOperator)
+        return adapter.getCoderById(id) { model ->
+            val age = getAge(model.getModelBirthday(), timeOperator)
             CoderProfileModel(
-                avatarUrl = it.getDtoAvatarLink(),
-                firstName = it.getDtoFirstName(),
-                id = it.getDtoId(),
-                lastName = it.getDtoLastName(),
-                position = it.getDtoPosition(),
-                userTag = it.getDtoUserTag(),
-                phoneNumber = it.getDtoPhone(),
+                avatarUrl = model.getModelAvatarLink(),
+                firstName = model.getModelFirstName(),
+                id = model.getModelId(),
+                lastName = model.getModelLastName(),
+                position = model.getModelPosition(),
+                userTag = model.getModelUserTag(),
+                phoneNumber = model.getModelPhone(),
                 age = age,
-                formattedBirthdayString = formatBirthday(it.getDtoBirthday(), timeOperator),
+                formattedBirthdayString = formatBirthday(model.getModelBirthday(), timeOperator),
                 russianAgePostfix = getRussianAgeLogicalPostfix(age)
 
             )
-        }.mapCatching { codersList ->
-            codersList.first { coder -> coder.id == id }
         }
     }
 
@@ -61,7 +59,8 @@ internal class CoderProfileRepositoryImpl @Inject constructor(
     }
 
     private fun getAge(stringDateRepresent: String, timeOperator: TimeOperator): Int {
-        val coderBirthDayLocalDateTime = getCoderBirthdayLocalDateTime(stringDateRepresent, timeOperator)
+        val coderBirthDayLocalDateTime =
+            getCoderBirthdayLocalDateTime(stringDateRepresent, timeOperator)
 
         val coderBirthYear = coderBirthDayLocalDateTime.year
 
@@ -77,7 +76,10 @@ internal class CoderProfileRepositoryImpl @Inject constructor(
         return if (isAlreadyGotOlder) currentYear - coderBirthYear else currentYear - coderBirthYear - 1
     }
 
-    private fun getCoderBirthdayLocalDateTime(stringDateRepresent: String, timeOperator: TimeOperator): LocalDateTime{
+    private fun getCoderBirthdayLocalDateTime(
+        stringDateRepresent: String,
+        timeOperator: TimeOperator,
+    ): LocalDateTime {
         return timeOperator.getCurrentFromStringDate(
             date = stringDateRepresent
                 .plus(KodeTraineeCommon.RemoteSource.timePatternAdjustment),

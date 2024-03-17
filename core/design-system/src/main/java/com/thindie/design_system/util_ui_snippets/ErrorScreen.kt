@@ -12,6 +12,7 @@ import com.thindie.design_system.theme.KodeTraineeTheme
 
 @Composable
 fun ErrorScreen(modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
+
     BaseUtilSnippet(
         modifier = modifier,
         painter = KodeTraineeDrawable.ErrorScreen.ufo.painter(),
