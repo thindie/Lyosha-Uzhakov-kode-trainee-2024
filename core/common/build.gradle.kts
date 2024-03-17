@@ -55,4 +55,5 @@ dependencies {
     kapt(Dependencies.Dagger.annotationProcessorCompiler)
 
     implementation(project(Modules.network))
+    implementation(project(Modules.dataBase))
 }

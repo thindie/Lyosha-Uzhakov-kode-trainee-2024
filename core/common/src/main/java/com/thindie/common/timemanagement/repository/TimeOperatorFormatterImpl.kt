@@ -6,23 +6,15 @@ import javax.inject.Inject
 import javax.inject.Named
 
 internal class TimeOperatorFormatterImpl @Inject constructor(
-    @Named("iso") private val isoFormat: DateTimeFormatter,
-    @Named("day") private val dayFormat: DateTimeFormatter,
-    @Named("datePicker") private val isoFormatter: DateTimeFormatter,
-    @Named("dayShort") private val dayFormatShort: DateTimeFormatter,
-    @Named("daySimpleNumber") private val daySimpleFormat: DateTimeFormatter,
-    @Named("monthTitle") private val monthTitleFormat: DateTimeFormatter,
-    @Named("dayFull") private val weekDayFullFormat: DateTimeFormatter,
-) : TimeOperatorFormatter {
+    @Named("fullDate") private val fullDate: DateTimeFormatter,
+    @Named("year") private val dayFormat: DateTimeFormatter,
+    @Named("dayMonth") private val dayFormatShort: DateTimeFormatter,
 
-    override fun getDatePickerFormat() = isoFormatter
-    override fun getIsoFormat() = isoFormat
-    override fun getDayFormat() = dayFormat
-    override fun getDayShortFormat() = dayFormatShort
+    ) : TimeOperatorFormatter {
 
-    override fun getSimpleFormat() = daySimpleFormat
+    override fun getFullDateFormat() = fullDate
+    override fun getYearFormat() = dayFormat
+    override fun getDayMonthFormat() = dayFormatShort
 
-    override fun getMonthTitleFormat() = monthTitleFormat
 
-    override fun getWeekDayFullFormat() = weekDayFullFormat
 }

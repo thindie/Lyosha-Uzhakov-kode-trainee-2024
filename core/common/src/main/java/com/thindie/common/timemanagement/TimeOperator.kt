@@ -13,4 +13,8 @@ interface TimeOperator {
     fun getCurrent(): LocalDateTime
 
     fun getTimeFormatter(): TimeOperatorFormatter
+
+    fun getMillisFromCurrent(localDateTime: LocalDateTime): Long
+
+    fun getCurrentFromStringDate(date: String, pattern: String): LocalDateTime
 }

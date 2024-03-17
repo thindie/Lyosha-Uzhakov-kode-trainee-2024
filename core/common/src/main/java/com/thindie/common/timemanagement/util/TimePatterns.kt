@@ -6,29 +6,16 @@ import javax.inject.Singleton
 @Singleton
 internal class TimePatterns @Inject constructor() {
 
-    fun patternSpecialFormat(): String {
-        return "E, dd MMM, yyyy"
+    fun dayMonthYear(): String {
+        return "d MMMM yyyy"
     }
 
-    fun patternSimpleDay(): String {
-        return "d"
+    fun year(): String {
+        return "yyyy"
     }
 
-    fun patternCustom(): String {
-        return "dd_MMMM_"
+    fun dayMonth(): String {
+        return "d MMM"
     }
-
-    fun patternDay(): String {
-        return "EEEE"
-    }
-
-    fun patternDayShort(): String {
-        return "E"
-    }
-
-    fun patternMonthFull(): String {
-        return "LLLL"
-    }
-
 
 }

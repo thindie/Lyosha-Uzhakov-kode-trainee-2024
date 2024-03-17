@@ -74,6 +74,7 @@ dependencies {
     implementation(Dependencies.Compose.material3)
     implementation(Dependencies.Compose.navigation)
     implementation(Dependencies.Compose.hiltNavigation)
+    implementation(Dependencies.Compose.material)
 
     // Dagger
     implementation(Dependencies.Dagger.dagger)
@@ -96,5 +97,7 @@ dependencies {
     implementation(project(Modules.network))
     implementation(project(Modules.featureMain))
     implementation(project(Modules.designSystem))
-
+    implementation(project(Modules.featureProfile))
+    implementation(project(Modules.model))
+    implementation(project(Modules.dataBase))
 }

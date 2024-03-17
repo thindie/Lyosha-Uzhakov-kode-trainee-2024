@@ -4,10 +4,12 @@ import com.thindie.common.timemanagement.TimeOperator
 import com.thindie.common.timemanagement.TimeOperatorFormatter
 import java.time.Instant
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
+
 
 @Singleton
 internal class TimeOperatorImpl @Inject constructor(
@@ -17,7 +19,7 @@ internal class TimeOperatorImpl @Inject constructor(
     TimeOperator {
     override fun getCurrent(timeInMillis: Long): String {
         val localDateTime = getCurrentLocalDateTime(timeInMillis)
-        return timeOperatorFormatter.getDatePickerFormat().format(localDateTime)
+        return timeOperatorFormatter.getFullDateFormat().format(localDateTime)
     }
 
     override fun getCurrent(timeInMillis: Long, pattern: String): String {
@@ -46,6 +48,23 @@ internal class TimeOperatorImpl @Inject constructor(
 
     override fun getTimeFormatter(): TimeOperatorFormatter {
         return timeOperatorFormatter
+    }
+
+    override fun getMillisFromCurrent(localDateTime: LocalDateTime): Long {
+        return try {
+            return localDateTime.toInstant(ZoneOffset.UTC).toEpochMilli()
+        } catch (e: Exception) {
+            0L
+        }
+    }
+
+    override fun getCurrentFromStringDate(date: String, pattern: String): LocalDateTime {
+        return try {
+            val dateFormatter = DateTimeFormatter.ofPattern(pattern)
+            return LocalDateTime.parse(date, dateFormatter)
+        } catch (_: Exception) {
+            getLocalDateTime(timeZone)
+        }
     }
 
 
