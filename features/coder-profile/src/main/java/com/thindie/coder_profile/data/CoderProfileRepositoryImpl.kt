@@ -43,6 +43,8 @@ internal class CoderProfileRepositoryImpl @Inject constructor(
     private fun getRussianAgeLogicalPostfix(age: Int): RussianAgePostfix {
         require(age > -1 && age < 120)
 
+        if (age in 5 .. 20) return RussianAgePostfix.FiveToTen
+
         return when (age.toString().last().digitToInt()) {
             0 -> {
                 RussianAgePostfix.FiveToTen
